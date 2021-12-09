@@ -31,10 +31,10 @@
 
 **10/27/21**
 - Zoom meeting with Dr. H
-- Dr. H provided fields for database tables
 
 **10/29/21**
 - RF-2 and RF-3 feedback received from Dr. H
+- Dr. H provided fields for database tables
 
 **11/3/21**
 - Zoom meeting with Dr. H
