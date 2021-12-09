@@ -6,7 +6,7 @@
 **9/14/21**
 - Submitted formal abstract to Dr. H
 - Formal abstract approved by Dr. H
-- Submitted formal abstract to Dr. Finkbine along with Team Name & Sponsor
+- Submitted formal abstract to Dr. Finkbine along with Team Name and Sponsor
 - Initial meeting held via phone call with Dr. H
 
 **9/16/21**
