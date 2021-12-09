@@ -58,5 +58,7 @@
 
 **11/23/21**
 - RF-5 approved by Dr. H
-- Dr. H approved all corrected/updated reports
 - Submitted RF-5 in Canvas
+
+**12/1/21**
+- Zoom meeting with Dr. H
