@@ -17,7 +17,7 @@
 
 **9/20/21**
 - RF-1 approved by Dr. H
-- Submitted RF-1 Canvas
+- Submitted RF-1 in Canvas
 
 **9/29/21**
 - Submitted RF-2 to Dr. H
