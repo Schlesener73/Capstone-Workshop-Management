@@ -28,6 +28,7 @@
 
 **10/22/21**
 - Submitted RF-3 to Dr. H
+- Updated Dr. Finkbine on RF-2 and RF-3 status
 
 **10/27/21**
 - Zoom meeting with Dr. H
@@ -35,6 +36,7 @@
 **10/29/21**
 - RF-2 and RF-3 feedback received from Dr. H
 - Dr. H provided fields for database tables
+- Updated Dr. Finkbine on RF-2, RF-3, and RF-4 status
 
 **11/3/21**
 - Zoom meeting with Dr. H
@@ -60,6 +62,7 @@
 **11/23/21**
 - RF-5 approved by Dr. H
 - Submitted RF-5 in Canvas
+- Notified Dr. Finkbine that all reports are now in Canvas
 
 **12/1/21**
 - Zoom meeting with Dr. H
