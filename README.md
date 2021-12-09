@@ -1,4 +1,4 @@
-# Capstone:  Workshop Management Web Application
+## Capstone Project:  Workshop Management Web Application
 
 **Sponsor:**  Dr. Suranga Hettiarachchi
 
