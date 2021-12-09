@@ -18,13 +18,13 @@ I had a Zoom meeting with Dr. H where we discussed RF-2 and RF-3.  He hadn't got
 
 ### 11/3/21
 
-I had a Zoom meeting with Dr. H.  I let him know that I was working on the corrections/updates for RF-2 and RF-3 and that I would be submitting them along with RF-4 soon.
+I had a Zoom meeting with Dr. H where we discussed the status of the reports.  I let him know that I was working on the corrections/updates for RF-2 and RF-3 and that I would be submitting them along with RF-4 soon.
 
 ***
 
 ### 11/16/21
 
-I had a Zoom meeting with Dr. H where we discussed RF-4.  He let me know that he had provided feedback on RF-4.  I told him that I would make the corrections/updates on RF-4 tonight and get him RF-5 soon.
+I had a Zoom meeting with Dr. H where we discussed adding a simple login feature.  He let me know that he had provided feedback on RF-4.  I told him that I would make the corrections/updates on RF-4 tonight and get him RF-5 soon.
 
 ***
 
