@@ -1,0 +1,34 @@
+<div class="dateRange">
+    <select (change)="setSelection($event)">
+        <option value="all">All</option>
+        <option value="prior">Past</option>
+        <option value="current">Current</option>
+        <option value="future">Future</option>
+    </select>
+</div>
+<table class="center">
+    <tr>
+        <th>Workshop Dates</th>
+        <th>Meeting Time</th>
+        <th>Location</th>
+        <th>Participants</th>
+        <th>Frequency</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr *ngFor="let workshop of workshops">
+        <td>{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</td>
+        <td>{{workshop.meet | string2ampm}}</td>
+        <td>{{workshop.location}}</td>
+        <td>{{workshop.numofpart}}</td>
+        <td>{{workshop.frequency}}</td>
+        <td><button type="button" class="btn btn-primary" (click)="viewWorkshop(workshop)"><i class="fa fa-file-text-o"></i></button></td>
+        <td><button type="button" class="btn btn-primary" (click)="editWorkshop(workshop)"><i class="fa fa-edit"></i></button></td>
+        <td><button type="button" class="btn btn-primary" (click)="deleteWorkshop(workshop)"><i class="fa fa-trash"></i></button></td>
+    </tr>
+</table>
+
+<span class="container">
+    <button type="button" class="btn btn-primary" (click)="addWorkshop()"><i class="fa fa-plus"></i> Add Workshop</button>
+</span>

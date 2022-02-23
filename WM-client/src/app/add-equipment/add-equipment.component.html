@@ -1,0 +1,67 @@
+<div style="width: 500px; margin: auto;">
+    <h4 text-align="center">Add Equipment</h4>
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    required
+                    [(ngModel)]="equipment.name"
+                    name="name"
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="storage_loc">Storage Location</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="storage_loc"
+                    required
+                    [(ngModel)]="equipment.storage_loc"
+                    name="storage_loc"
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="year"
+                    required
+                    [(ngModel)]="equipment.year"
+                    name="year"
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input
+                    type="file"
+                    class="form-control"
+                    id="image"
+                    [(ngModel)]="equipment.image"
+                    name="image"
+                />
+            </div>
+            
+            <div class="form-group">
+                <label for="eq_condition">Condition</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="eq_condition"
+                    required
+                    [(ngModel)]="equipment.eq_condition"
+                    name="eq_condition"
+                />
+            </div>
+            
+        </form>
+
+    <div text-align="center"><button (click)="createEquipment()" class="btn btn-success">Submit</button></div>
+
+</div>

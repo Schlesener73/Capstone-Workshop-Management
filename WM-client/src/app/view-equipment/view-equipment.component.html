@@ -1,0 +1,79 @@
+<div class="grid-container">
+    <div class="section1">
+        <table>
+            <tr>
+                <td><b>Equipment Name:</b>&nbsp;&nbsp;{{equipment.name}}</td>
+            </tr>
+            <tr>
+                <td><b>Year:</b>&nbsp;&nbsp;{{equipment.year}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="section2">
+        <table>
+            <tr>
+                <td><b>Storage Location:</b>&nbsp;&nbsp;{{equipment.storage_loc}}</td>
+            </tr>
+            <tr>
+                <td><b>Condition:</b>&nbsp;&nbsp;{{equipment.eq_condition}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section3">
+        <table>
+            <tr>
+                <td><b>Participant Name:</b>&nbsp;&nbsp;{{participant.first_name}} {{participant.last_name}}</td>
+            </tr>
+            <tr>
+                <td><b>Address:</b>&nbsp;&nbsp;{{participant.address}}, {{participant.city}}, {{participant.state}}  {{participant.zip}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="section4">
+        <table>
+            <tr>
+                <td><b>Email:</b>&nbsp;&nbsp;{{participant.email}}</td>
+            </tr>
+            <tr>
+                <td><b>Phone:</b>&nbsp;&nbsp;{{participant.phone | phone}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section5">
+        <table>
+            <tr>
+                <td><b>Workshop Dates:</b>&nbsp;&nbsp;{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</td>
+            </tr>
+            <tr>
+                <td><b>Meet:</b>&nbsp;&nbsp;{{workshop.frequency}} {{workshop.meet | string2ampm}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="section6">
+        <table>
+            <tr>
+                <td><b>Location:</b>&nbsp;&nbsp;{{workshop.location}}</td>
+            </tr>
+            <tr>
+                <td><b>Participants:</b>&nbsp;&nbsp;{{workshop.numofpart}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="left-menu">
+        <div>
+            <button type="button" class="btn btn-primary" (click)="editEquipment()"><i class="fa fa-edit"></i> Edit Equipment</button>
+        </div>
+<br>
+        <div>
+            <button type="button" class="btn btn-primary" (click)="deleteEquipment()"><i class="fa fa-trash"></i> Delete Equipment</button>
+        </div>
+        <br>
+        <div *ngIf="(equipment.participant_id != null)">
+            <button type="button" class="btn btn-primary" (click)="toParticipant()"><i class="fa fa-arrow-left"></i> Participant</button>
+        </div>
+    </div>  
+        
+</div>
