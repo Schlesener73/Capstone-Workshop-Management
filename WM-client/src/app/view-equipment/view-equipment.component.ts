@@ -31,6 +31,13 @@ export class ViewEquipmentComponent implements OnInit {
     document.getElementById("AE").setAttribute("class", "hideListItem");
     document.getElementById("EE").setAttribute("class", "showListItem");
     document.getElementById("EEh").setAttribute("href", `/equip/${this.route.snapshot.params.id}`);
+    document.getElementById("LI").setAttribute("class", "hideListItem");
+    document.getElementById("REG").setAttribute("class", "hideListItem");
+    document.getElementById("LO").setAttribute("class", "showListItem");
+    const fixedMenu = document.getElementsByClassName("menu");
+    for (let i = 0; i < fixedMenu.length; i++) {
+      fixedMenu[i].setAttribute("style", "display:inline;");
+    }
   }
 
   getEquipment() {

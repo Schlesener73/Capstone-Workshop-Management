@@ -36,7 +36,14 @@ export class AddEquipmentComponent implements OnInit {
     document.getElementById("EP").setAttribute("class", "hideListItem");
     document.getElementById("AE").setAttribute("class", "hideListItem");
     document.getElementById("EE").setAttribute("class", "hideListItem");
-  }
+    document.getElementById("LI").setAttribute("class", "hideListItem");
+    document.getElementById("REG").setAttribute("class", "hideListItem");
+    document.getElementById("LO").setAttribute("class", "showListItem");
+    const fixedMenu = document.getElementsByClassName("menu");
+    for (let i = 0; i < fixedMenu.length; i++) {
+      fixedMenu[i].setAttribute("style", "display:inline;");
+    }
+}
 
   onFileSelect(event) {
     const file = event.target.files[0];

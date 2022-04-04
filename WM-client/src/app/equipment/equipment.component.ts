@@ -27,6 +27,13 @@ export class EquipmentComponent implements OnInit {
     document.getElementById("AE").setAttribute("class", "showListItem");
     document.getElementById("AEh").setAttribute("href", `/new-equipment/-1`);
     document.getElementById("EE").setAttribute("class", "hideListItem");
+    document.getElementById("LI").setAttribute("class", "hideListItem");
+    document.getElementById("REG").setAttribute("class", "hideListItem");
+    document.getElementById("LO").setAttribute("class", "showListItem");
+    const fixedMenu = document.getElementsByClassName("menu");
+    for (let i = 0; i < fixedMenu.length; i++) {
+      fixedMenu[i].setAttribute("style", "display:inline;");
+    }
   }
 
   getEquipment() {

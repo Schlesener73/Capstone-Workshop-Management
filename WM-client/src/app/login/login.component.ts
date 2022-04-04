@@ -21,7 +21,24 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.setNavigation();
     this.isUserLogin(); 
+  }
+
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "hideListItem");
+    document.getElementById("EW").setAttribute("class", "hideListItem");
+    document.getElementById("AP").setAttribute("class", "hideListItem");
+    document.getElementById("EP").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "hideListItem");
+    document.getElementById("EE").setAttribute("class", "hideListItem");
+    document.getElementById("LI").setAttribute("class", "hideListItem");
+    document.getElementById("REG").setAttribute("class", "showListItem");
+    document.getElementById("LO").setAttribute("class", "hideListItem");
+    const fixedMenu = document.getElementsByClassName("menu");
+    for (let i = 0; i < fixedMenu.length; i++) {
+      fixedMenu[i].setAttribute("style", "display:none;");
+    }
   }
   
   onSubmit(form: NgForm) {
@@ -32,7 +49,14 @@ export class LoginComponent implements OnInit {
        
         this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));  
         this._auth.setDataInLocalStorage('token', res.token);  
-        this._router.navigate(['']);
+        document.getElementById("LI").setAttribute("class", "hideListItem");
+        document.getElementById("REG").setAttribute("class", "hideListItem");
+        document.getElementById("LO").setAttribute("class", "showListItem");
+        const fixedMenu = document.getElementsByClassName("menu");
+        for (let i = 0; i < fixedMenu.length; i++) {
+          fixedMenu[i].setAttribute("style", "display:inline;");
+        }
+        this._router.navigate(['workshops']);
       }
     })
   }
