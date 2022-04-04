@@ -29,7 +29,7 @@
             <th>Participants</th>
         </tr>
         <tr>
-            <td>{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</td>
+            <td><a href="/workshop/{{workshop.id}}">{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</a></td>
             <td>{{workshop.frequency}} {{workshop.meet | string2ampm}}</td>
             <td>{{workshop.location}}</td>
             <td>{{workshop.numofpart}}</td>
@@ -41,38 +41,21 @@
             <th>Equipment Name</th>
             <th>Storage Location</th>
             <th>Year</th>
-            <th>Image</th>
             <th>Condition</th>
-            <th>View</th>
         </tr>
         <tr *ngFor="let equip of equipment">
-            <td>{{equip.name}}</td>
+            <td><a href="javascript:void(0);" (click)="viewEquipment(equip)">{{equip.name}}</a></td>
             <td>{{equip.storage_loc}}</td>
             <td>{{equip.year}}</td>
-            <td><img src="data:image/jpeg;base64,{{equip.image}}"></td>
             <td>{{equip.eq_condition}}</td>
-            <td><button type="button" class="btn btn-primary" (click)="viewEquipment(equip)"><i class="fa fa-file-text-o"></i></button></td>
             </tr>
     </table></div>
 
     <div class="left-menu">
-        <div>
-            <button type="button" class="btn btn-primary" (click)="addEquipment()"><i class="fa fa-plus"></i> Add Equipment</button>
-        </div>
-        <br>
-        <div>
-            <button type="button" class="btn btn-primary" (click)="editParticipant()"><i class="fa fa-edit"></i> Edit Participant</button>
-        </div>
         <ng-template [ngIf]="(equipment == '')">
             <br>
             <div>
                 <button type="button" class="btn btn-primary" (click)="deleteParticipant()"><i class="fa fa-trash"></i> Delete Participant</button>
-            </div>
-        </ng-template>
-        <ng-template [ngIf]="(participant.workshop_id != null)">
-            <br>
-            <div class="container">
-                <button type="button" class="btn btn-primary" (click)="toWorkshop()"><i class="fa fa-arrow-left"></i> Workshop</button>
             </div>
         </ng-template>
     </div>  

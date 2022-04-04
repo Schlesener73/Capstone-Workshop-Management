@@ -4,7 +4,7 @@ table.center {
 }
 
 table, tr, td, th {
-    padding: 5px 15px;
+    padding: 5px 20px;
 }
 
 td, th {
@@ -17,16 +17,7 @@ td, th {
     margin-top: 1rem;
 }
 
-a{
-    padding: 5px 10px;
-    border: 1px solid darkblue;
-    background-color: steelblue;
-    color: white;
-    text-decoration: none;
-    border-radius: 3px;
-}
-
-a:hover{
-    color: black;
-    background-color: lightgrey;
+.dateRange {
+    position: fixed;
+    left: 10px;
 }

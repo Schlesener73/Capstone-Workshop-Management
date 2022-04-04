@@ -26,12 +26,17 @@ export class EditWorkshopComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    if (this.route.snapshot.params.id == "new")
-      this.editMode = "Add";
-    else {
-      this.editMode = "Edit";
-      this.getWorkshop();
-    }
+    this.setNavigation();
+    this.getWorkshop();
+  }
+
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "hideListItem");
+    document.getElementById("EW").setAttribute("class", "hideListItem");
+    document.getElementById("AP").setAttribute("class", "hideListItem");
+    document.getElementById("EP").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "hideListItem");
+    document.getElementById("EE").setAttribute("class", "hideListItem");
   }
 
   getWorkshop() {
@@ -50,37 +55,16 @@ export class EditWorkshopComponent implements OnInit {
   }
 
   saveWorkshop() {
-    if (this.editMode == "Add") {
-      const data = {
-        start: this.workshop.start,
-        end: this.workshop.end,
-        meet: this.workshop.meet,
-        location: this.workshop.location,
-        numofpart: 0,
-        frequency: this.workshop.frequency
-      };
-      this.server.addWorkshop(this.workshop)
+    this.server.updateWorkshop(this.route.snapshot.params.id, this.workshop)
       .subscribe(
         response => {
           console.log(response);
-          this.router.navigate(['/workshops']);
+          this.router.navigate([`/workshop/${this.route.snapshot.params.id}`]);
         },
         error => {
           console.log(error);
         }
       );
-    } else {
-      this.server.updateWorkshop(this.route.snapshot.params.id, this.workshop)
-        .subscribe(
-          response => {
-            console.log(response);
-            this.router.navigate(['/workshops']);
-          },
-          error => {
-            console.log(error);
-          }
-        );
-    }
   }
 
 }

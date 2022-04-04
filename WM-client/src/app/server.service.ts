@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,26 @@ import { Observable } from 'rxjs';
 export class ServerService {
 
   constructor(private http: HttpClient) { }
+
+  getTypeRequest(url) {
+    return this.http.get(`${environment.serverUrl}${url}`).pipe(map(res => {
+      return res;
+    }));
+  }
+  
+  postTypeRequest(url, payload) {
+    return this.http.post(`${environment.serverUrl}${url}`, payload);
+  }
+
+  putTypeRequest(url, payload) {
+    return this.http.put(`${environment.serverUrl}${url}`, payload).pipe(map(res => {
+      return res;
+    }));
+  }
+
+  uploadFile(formData): Observable<any> {
+    return this.http.post(`${environment.serverUrl}/uploadFile`, formData);
+  }
 
   getWorkshops(showDates): Observable<any> {
     if (showDates == "all")
@@ -25,8 +46,8 @@ export class ServerService {
     return this.http.post(`${environment.serverUrl}/workshops`, data);
   }
 
-  deleteWorkshop(data): Observable<any> {
-    return this.http.delete(`${environment.serverUrl}/workshops/${data.id}`);
+  deleteWorkshop(id): Observable<any> {
+    return this.http.delete(`${environment.serverUrl}/workshops/${id}`);
   }
 
   updateWorkshop(id, data): Observable<any> {

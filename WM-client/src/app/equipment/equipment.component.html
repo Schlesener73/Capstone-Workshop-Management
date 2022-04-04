@@ -4,22 +4,14 @@
             <th>Equipment Name</th>
             <th>Storage Location</th>
             <th>Year</th>
-            <th>Image</th>
             <th>Condition</th>
-            <th>View</th>
             </tr>
         <tr *ngFor="let equip of equipment">
-            <td>{{equip.name}}</td>
+            <td><a href="javascript:void(0);" (click)="viewEquipment(equip)">{{equip.name}}</a></td>
             <td>{{equip.storage_loc}}</td>
             <td>{{equip.year}}</td>
-            <td>{{equip.image}}</td>
             <td>{{equip.eq_condition}}</td>
-            <td><button type="button" class="btn btn-primary" (click)="viewEquipment(equip)"><i class="fa fa-file-text-o"></i></button></td>
         </tr>
     </table>
-
-    <span class="container">
-        <button type="button" class="btn btn-primary" (click)="addEquipment()"><i class="fa fa-plus"></i> Add Equipment</button>
-    </span>
 
 </div>

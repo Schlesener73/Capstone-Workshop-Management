@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./add-participant.component.css']
 })
 export class AddParticipantComponent implements OnInit {
+  workshops: any[] = [];
   participant = {
     first_name: '',
     last_name: '',
@@ -26,6 +27,30 @@ export class AddParticipantComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.setNavigation();
+    this.getWorkshops();
+  }
+
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "hideListItem");
+    document.getElementById("EW").setAttribute("class", "hideListItem");
+    document.getElementById("AP").setAttribute("class", "hideListItem");
+    document.getElementById("EP").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "hideListItem");
+    document.getElementById("EE").setAttribute("class", "hideListItem");
+  }
+
+  getWorkshops() {
+    this.server.getWorkshops("all")
+      .subscribe(
+        result => {
+          this.workshops = result;
+          console.log(result);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   createParticipant() {
@@ -44,19 +69,20 @@ export class AddParticipantComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.server.updateWorkshopCount(this.participant.workshop_id, data)
-          .subscribe(
-            response => {
-              console.log(response);
-              if (this.participant.workshop_id == 0)
-                this.router.navigate([`/participants}`]);
-              else
+          if (this.participant.workshop_id != -1) {
+            this.server.updateWorkshopCount(this.participant.workshop_id, data)
+            .subscribe(
+              response => {
+                console.log(response);
                 this.router.navigate([`/workshop/${this.participant.workshop_id}`]);
-            },
-            error => {
-              console.log(error);
-            }
-          );
+              },
+              error => {
+                console.log(error);
+              }
+            );
+          }
+          else
+            this.router.navigate([`/participants`]);
         },
         error => {
           console.log(error);

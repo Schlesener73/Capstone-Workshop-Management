@@ -19,7 +19,17 @@ export class EditEquipmentComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.setNavigation();
     this.getEquipment();
+  }
+
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "hideListItem");
+    document.getElementById("EW").setAttribute("class", "hideListItem");
+    document.getElementById("AP").setAttribute("class", "hideListItem");
+    document.getElementById("EP").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "hideListItem");
+    document.getElementById("EE").setAttribute("class", "hideListItem");
   }
 
   getEquipment() {
@@ -37,11 +47,12 @@ export class EditEquipmentComponent implements OnInit {
   }
 
   saveEquipment() {
+    this.equipment.image = this.equipment.image.substring(12);
     this.server.updateEquipment(this.route.snapshot.params.id, this.equipment)
       .subscribe(
         response => {
           console.log(response);
-          this.router.navigate([`/equipment/${this.source}/${this.equipment.id}`]);
+          this.router.navigate([`/equipment/${this.equipment.id}`]);
         },
         error => {
           console.log(error);

@@ -1,7 +1,100 @@
 const express = require('express');
+const multer = require('multer');
+const md5 = require('md5');
+const jwt = require('jsonwebtoken');
+
+var fileDir = './uploaded_images';
+
+// Configure Storage
+var storage = multer.diskStorage({
+
+  // Setting directory on disk to save uploaded files
+  destination: function (req, file, cb) {
+      cb(null, fileDir)
+  },
+
+  // Setting name of file saved
+  filename: function (req, file, cb) {
+      cb(null, file.originalname)
+  }
+})
+
+var upload = multer({
+  storage: storage
+})
 
 function createRouter(db) {
   const router = express.Router();
+
+  // GET users listing
+  router.post('/register', async function (req, res, next) {
+    try {
+      let { username, password } = req.body; 
+      const hashed_password = md5(password.toString())
+      const checkUsername = `Select username FROM users WHERE username = ?`;
+      console.log(hashed_password);
+      db.query(checkUsername, [username], (err, result, fields) => {
+        if(!result.length){
+          const sql = `Insert Into users (username, password) VALUES ( ?, ? )`
+          db.query(
+            sql, [username, hashed_password],
+          (err, result, fields) =>{
+            if(err){
+              res.send({ status: 0, data: err });
+            }else{
+              let token = jwt.sign({ data: result }, 'secret')
+              res.send({ status: 1, data: result, token : token });
+            }
+          
+          })
+        }
+      });
+    } catch (error) {
+      console.log("NO");
+      res.send({ status: 0, error: error });
+    }
+  });
+
+  // post login
+  router.post('/login', async function (req, res, next) {
+    try {
+      let { username, password } = req.body; 
+      const hashed_password = md5(password.toString())
+      const sql = `SELECT * FROM users WHERE username = ? AND password = ?`
+      db.query(
+        sql, [username, hashed_password],
+      function(err, result, fields){
+        if(err){
+          res.send({ status: 0, data: err });
+        }else{
+          let token = jwt.sign({ data: result }, 'secret')
+          res.send({ status: 1, data: result, token: token });
+        }
+       
+      })
+    } catch (error) {
+      res.send({ status: 0, error: error });
+    }
+  });
+
+  // upload file to server
+  router.post('/uploadfile', upload.single('uploadedImage'), (req, res, next) => {
+    const file = req.file;
+    if (!file) {
+        const error = new Error('Please upload a file')
+        error.httpStatusCode = 400
+        return next(error)
+    }
+    res.status(200).send({
+        statusCode: 200,
+        status: 'success',
+        uploadedFile: file
+    })
+  }, (error, req, res, next) => {
+      res.status(400).send({
+          error: error.message
+      })
+  })
 
   // list all workshops
   router.get('/workshops', function (req, res, next) {
@@ -252,9 +345,23 @@ function createRouter(db) {
 
   // add participant to workshop
   router.post('/participant/:workshopID', function (req, res, next) {
-    db.query(
-        'INSERT INTO participants (first_name, last_name, address, city, state, zip, email, phone, workshop_id) VALUES (?,?,?,?,?,?,?,?,?)',
-        [req.body.first_name, req.body.last_name, req.body.address, req.body.city, req.body.state, req.body.zip, req.body.email, req.body.phone, req.params.workshopID],
+    if (req.params.workshopID != -1)
+      db.query(
+          'INSERT INTO participants (first_name, last_name, address, city, state, zip, email, phone, workshop_id) VALUES (?,?,?,?,?,?,?,?,?)',
+          [req.body.first_name, req.body.last_name, req.body.address, req.body.city, req.body.state, req.body.zip, req.body.email, req.body.phone, req.params.workshopID],
+          (error) => {
+            if (error) {
+              console.error(error);
+              res.status(500).json({status: 'error'});
+            } else {
+              res.status(200).json({status: 'ok'});
+            }
+          }
+      );
+    else {
+      db.query(
+        'INSERT INTO participants (first_name, last_name, address, city, state, zip, email, phone) VALUES (?,?,?,?,?,?,?,?)',
+        [req.body.first_name, req.body.last_name, req.body.address, req.body.city, req.body.state, req.body.zip, req.body.email, req.body.phone],
         (error) => {
           if (error) {
             console.error(error);
@@ -263,7 +370,8 @@ function createRouter(db) {
             res.status(200).json({status: 'ok'});
           }
         }
-    );
+      );
+    }
   });
 
   // delete participant from workshop
@@ -284,23 +392,38 @@ function createRouter(db) {
 
   // update participant
   router.put('/participants/:id', function(req, res, next) {
-    db.query(
-      'UPDATE participants SET first_name=?, last_name=?, address=?, city=?, state=?, zip=?, email=?, phone=? WHERE id=?',
-      [req.body.first_name, req.body.last_name, req.body.address, req.body.city, req.body.state, req.body.zip, req.body.email, req.body.phone, req.params.id],
-        (error) => {
-          if (error) {
-            console.error(error);
-            res.status(500).json({status: 'error'});
-          } else {
-            res.status(200).json({status: 'ok'});
+    if (req.body.workshop_id != -1) {
+      db.query(
+        'UPDATE participants SET first_name=?, last_name=?, address=?, city=?, state=?, zip=?, email=?, phone=?, workshop_id=? WHERE id=?',
+        [req.body.first_name, req.body.last_name, req.body.address, req.body.city, req.body.state, req.body.zip, req.body.email, req.body.phone, req.body.workshop_id, req.params.id],
+          (error) => {
+            if (error) {
+              console.error(error);
+              res.status(500).json({status: 'error'});
+            } else {
+              res.status(200).json({status: 'ok'});
+            }
           }
-        }
-    );
+      );
+    } else {
+      db.query(
+        'UPDATE participants SET first_name=?, last_name=?, address=?, city=?, state=?, zip=?, email=?, phone=?, workshop_id=NULL WHERE id=?',
+        [req.body.first_name, req.body.last_name, req.body.address, req.body.city, req.body.state, req.body.zip, req.body.email, req.body.phone, req.params.id],
+          (error) => {
+            if (error) {
+              console.error(error);
+              res.status(500).json({status: 'error'});
+            } else {
+              res.status(200).json({status: 'ok'});
+            }
+          }
+      );
+    }
   });
 
   // add equipment to participant
-  router.post('/equipment/:participantID', function (req, res, next) {
-    if (req.params.participantID != 0) {
+  router.post('/equipment/:participantID', upload.single('image'), function (req, res, next) {
+    if (req.params.participantID != -1) {
       db.query(
         'INSERT INTO equipment (name, storage_loc, year, image, eq_condition, participant_id) VALUES (?,?,?,?,?,?)',
         [req.body.name, req.body.storage_loc, req.body.year, req.body.image, req.body.eq_condition, req.params.participantID],

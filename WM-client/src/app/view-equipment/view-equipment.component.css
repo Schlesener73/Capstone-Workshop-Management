@@ -1,6 +1,6 @@
 .grid-container {
     display: grid;
-    grid-template-columns: 20% 40% 40%;
+    grid-template-columns: 25% 25% 25% 20%;
     grid-gap: 10px;
     background-color: white;
     padding: 10px;
@@ -12,10 +12,19 @@
     padding: 20px 0;
     font-size: 18px;
 }
-  
-.left-menu {
+
+.image-section {
     grid-row-start: 1;
     grid-row-end: 4;
+    color: black;
+    align-items: center;
+
+}
+
+.right-menu {
+    grid-row-start: 1;
+    grid-row-end: 4;
+    grid-column-start: 4;
 }
 
 .section1 {
@@ -28,6 +37,7 @@
   
 .section3 {
     color: black;
+    grid-column-start: 2;
 }  
 
 .section4 {
@@ -36,6 +46,7 @@
 
 .section5 {
     color: black;
+    grid-column-start: 2;
 }  
   
 .section6 {

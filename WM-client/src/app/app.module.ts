@@ -1,7 +1,8 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,10 @@ import { AddParticipantComponent } from './add-participant/add-participant.compo
 import { AddEquipmentComponent } from './add-equipment/add-equipment.component';
 import { String2ampmPipe } from './convert2ampm.pipe';
 import { PhonePipe } from './phone.pipe';
+import { SafeHtmlPipe } from './safe-html.pipe';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { InterceptorService } from './services/interceptor-service.service';
 
 @NgModule({
   declarations: [
@@ -38,15 +43,25 @@ import { PhonePipe } from './phone.pipe';
     AddParticipantComponent,
     AddEquipmentComponent,
     String2ampmPipe,
-    PhonePipe
+    PhonePipe,
+    SafeHtmlPipe,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

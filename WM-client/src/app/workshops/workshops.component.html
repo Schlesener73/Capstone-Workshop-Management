@@ -13,22 +13,13 @@
         <th>Location</th>
         <th>Participants</th>
         <th>Frequency</th>
-        <th>View</th>
-        <th>Edit</th>
-        <th>Delete</th>
     </tr>
     <tr *ngFor="let workshop of workshops">
-        <td>{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</td>
+        <td><a href="javascript:void(0);" (click)="viewWorkshop(workshop)">{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</a></td>
         <td>{{workshop.meet | string2ampm}}</td>
         <td>{{workshop.location}}</td>
         <td>{{workshop.numofpart}}</td>
         <td>{{workshop.frequency}}</td>
-        <td><button type="button" class="btn btn-primary" (click)="viewWorkshop(workshop)"><i class="fa fa-file-text-o"></i></button></td>
-        <td><button type="button" class="btn btn-primary" (click)="editWorkshop(workshop)"><i class="fa fa-edit"></i></button></td>
-        <td><button type="button" class="btn btn-primary" (click)="deleteWorkshop(workshop)"><i class="fa fa-trash"></i></button></td>
     </tr>
 </table>
 
-<span class="container">
-    <button type="button" class="btn btn-primary" (click)="addWorkshop()"><i class="fa fa-plus"></i> Add Workshop</button>
-</span>

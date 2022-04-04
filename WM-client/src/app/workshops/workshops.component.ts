@@ -16,7 +16,17 @@ export class WorkshopsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.setNavigation();
     this.getWorkshops();
+  }
+
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "showListItem");
+    document.getElementById("EW").setAttribute("class", "hideListItem");
+    document.getElementById("AP").setAttribute("class", "hideListItem");
+    document.getElementById("EP").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "hideListItem");
+    document.getElementById("EE").setAttribute("class", "hideListItem");
   }
 
   getWorkshops() {
@@ -30,32 +40,10 @@ export class WorkshopsComponent implements OnInit {
           console.log(error);
         }
       );
-
-  }
-
-  deleteWorkshop(workshop) {
-    this.server.deleteWorkshop(workshop)
-      .subscribe(
-        result => {
-          this.getWorkshops();
-          console.log(result);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
-
-  editWorkshop(workshop) {
-    this.router.navigate([`/workshops/${workshop.id}`]);
   }
 
   viewWorkshop(workshop) {
     this.router.navigate([`/workshop/${workshop.id}`]);
-  }
-
-  addWorkshop() {
-    this.router.navigate([`/workshops/new`]);
   }
 
   setSelection(event: any) {

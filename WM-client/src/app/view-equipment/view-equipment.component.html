@@ -1,4 +1,12 @@
 <div class="grid-container">
+    <div class="image-section">
+        <table>
+            <tr>
+                <td><img src="{{imagePath}}/{{equipment.image}}"></td>
+            </tr>
+        </table>
+    </div>
+
     <div class="section1">
         <table>
             <tr>
@@ -23,7 +31,7 @@
     <div class="section3">
         <table>
             <tr>
-                <td><b>Participant Name:</b>&nbsp;&nbsp;{{participant.first_name}} {{participant.last_name}}</td>
+                <td><b>Participant Name:</b>&nbsp;&nbsp;<a href="/participant/{{this.participant.id}}">{{participant.last_name}}, {{participant.first_name}}</a></td>
             </tr>
             <tr>
                 <td><b>Address:</b>&nbsp;&nbsp;{{participant.address}}, {{participant.city}}, {{participant.state}}  {{participant.zip}}</td>
@@ -44,7 +52,7 @@
     <div class="section5">
         <table>
             <tr>
-                <td><b>Workshop Dates:</b>&nbsp;&nbsp;{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</td>
+                <td><b>Workshop Dates:</b>&nbsp;&nbsp;<a href="/workshop/{{workshop.id}}">{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</a></td>
             </tr>
             <tr>
                 <td><b>Meet:</b>&nbsp;&nbsp;{{workshop.frequency}} {{workshop.meet | string2ampm}}</td>
@@ -62,17 +70,9 @@
         </table>
     </div>
 
-    <div class="left-menu">
+    <div class="right-menu">
         <div>
-            <button type="button" class="btn btn-primary" (click)="editEquipment()"><i class="fa fa-edit"></i> Edit Equipment</button>
-        </div>
-<br>
-        <div>
-            <button type="button" class="btn btn-primary" (click)="deleteEquipment()"><i class="fa fa-trash"></i> Delete Equipment</button>
-        </div>
-        <br>
-        <div *ngIf="(equipment.participant_id != null)">
-            <button type="button" class="btn btn-primary" (click)="toParticipant()"><i class="fa fa-arrow-left"></i> Participant</button>
+            <button type="button" class="btn btn-primary" (click)="deleteEquipment()"><i class="fa fa-trash"></i> Equipment</button>
         </div>
     </div>  
         

@@ -21,6 +21,17 @@ export class ViewWorkshopComponent implements OnInit {
   ngOnInit() {
     this.getParticipants();
     this.getWorkshop();
+    this.setNavigation();
+  }
+  
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "hideListItem");
+    document.getElementById("EW").setAttribute("class", "showListItem");
+    document.getElementById("AP").setAttribute("class", "showListItem");
+    document.getElementById("APh").setAttribute("href", `/new-participant/${this.route.snapshot.params.id}`);
+    document.getElementById("EP").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "hideListItem");
+    document.getElementById("EE").setAttribute("class", "hideListItem");
   }
 
   getParticipants() {
@@ -42,6 +53,7 @@ export class ViewWorkshopComponent implements OnInit {
     .subscribe(
       result => {
         this.workshop = result[0];
+        document.getElementById("EWh").setAttribute("href", `/workshops/${this.workshop.id}`);
         console.log(result);
       },
       error => {
@@ -64,15 +76,23 @@ export class ViewWorkshopComponent implements OnInit {
   }
 
   viewParticipant(participant) {
-    this.router.navigate([`/participant/4/${participant.id}`]);
-  }
-
-  addParticipant() {
-    this.router.navigate([`/new-participant/${this.route.snapshot.params.id}`]);
+    this.router.navigate([`/participant/${participant.id}`]);
   }
 
   viewEquipment(equipment) {
-    this.router.navigate([`/equipment/4/${equipment.id}`]);
+    this.router.navigate([`/equipment/${equipment.id}`]);
   }
 
+  deleteWorkshop() {
+    this.server.deleteWorkshop(this.route.snapshot.params.id)
+      .subscribe(
+        result => {
+          console.log(result);
+          this.router.navigate([`/workshops`]);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
 }

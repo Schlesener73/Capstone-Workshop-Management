@@ -19,4 +19,5 @@ export class NavComponent {
       'text': 'EQUIPMENT'
     }
   ]
+  
 }

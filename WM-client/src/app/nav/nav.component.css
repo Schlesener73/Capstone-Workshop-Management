@@ -1,3 +1,11 @@
+.hideListItem {
+  display: none;
+}
+
+.showListItem {
+  display: inline;
+}
+
 a{
     padding: 5px 10px;
     text-decoration: none;
@@ -33,6 +41,12 @@ ul {
   
 li {
   float: left;
+  display: block;
+  color: white;
+  font-size: 15px;
+  text-align: center;
+  padding: 0px 16px 0px 16px;
+  text-decoration: none;
 }
 
 li a {
@@ -47,4 +61,10 @@ li a {
 li a:hover {
   color: #111;
   background-color: rgb(118, 118, 119);
+}
+
+.nav-item {
+  text-align: right;
+  background-position: 100%;
+  color: blue;
 }

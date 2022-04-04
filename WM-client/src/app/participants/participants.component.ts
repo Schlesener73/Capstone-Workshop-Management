@@ -15,7 +15,18 @@ export class ParticipantsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.setNavigation();
     this.getParticipants();
+  }
+
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "hideListItem");
+    document.getElementById("EW").setAttribute("class", "hideListItem");
+    document.getElementById("AP").setAttribute("class", "showListItem");
+    document.getElementById("APh").setAttribute("href", `/new-participant/-1`);
+    document.getElementById("EP").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "hideListItem");
   }
 
   getParticipants() {
@@ -33,6 +44,6 @@ export class ParticipantsComponent implements OnInit {
   }
 
   viewParticipant(participant) {
-    this.router.navigate([`/participant/2/${participant.id}`]);
+    this.router.navigate([`/participant/${participant.id}`]);
   }
 }

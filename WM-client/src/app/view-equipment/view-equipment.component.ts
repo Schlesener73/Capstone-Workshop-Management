@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerService } from '../server.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-view-equipment',
@@ -11,14 +12,25 @@ export class ViewEquipmentComponent implements OnInit {
   participant = null;
   workshop = null;
   equipment = null;
-  source = this.route.snapshot.params.source;
+  imagePath = environment.serverUrl + environment.imagesDir;
   
   constructor(private server: ServerService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
+    this.setNavigation();
     this.getEquipment();
+  }
+
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "hideListItem");
+    document.getElementById("EW").setAttribute("class", "hideListItem");
+    document.getElementById("AP").setAttribute("class", "hideListItem");
+    document.getElementById("EP").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "hideListItem");
+    document.getElementById("EE").setAttribute("class", "showListItem");
+    document.getElementById("EEh").setAttribute("href", `/equip/${this.route.snapshot.params.id}`);
   }
 
   getEquipment() {
@@ -68,25 +80,14 @@ export class ViewEquipmentComponent implements OnInit {
       .subscribe(
         result => {
           console.log(result);
-          if (this.source != 3 && this.source != 4) {
-            this.source = (this.source - 5) / 10;
-            this.router.navigate([`/participant/${this.source}/${this.participant.id}`]);
-          } else
-            this.router.navigate([`/equipment`]);
+          if (this.participant.id != -1)
+            this.router.navigate([`/participant/${this.participant.id}`]);
         },
         error => {
           console.log(error);
         }
       );
+    this.router.navigate([`/equipment`]);
   }
 
-  editEquipment() {
-    this.router.navigate([`/equip/${this.source}/${this.equipment.id}`]);
-  }
-
-  toParticipant() {
-    if (this.source != 3 && this.source != 4)
-      this.source = (this.source - 5) / 10;
-    this.router.navigate([`/participant/${this.source}/${this.participant.id}`]);
-  }
 }

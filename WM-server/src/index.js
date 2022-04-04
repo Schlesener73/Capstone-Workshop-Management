@@ -18,8 +18,10 @@ const port = process.env.PORT || 8080;
 const app = express()
   .use(cors())
   .use(bodyParser.json())
+  .use("/uploaded_images", express.static("uploaded_images"))
   .use(events(connection));
 
 app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);
 });
+

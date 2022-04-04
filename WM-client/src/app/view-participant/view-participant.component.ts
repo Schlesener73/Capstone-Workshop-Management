@@ -11,14 +11,26 @@ export class ViewParticipantComponent implements OnInit {
   participant = null;
   equipment = null;
   workshop = null;
-  source = this.route.snapshot.params.source;
   
   constructor(private server: ServerService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
+    this.setNavigation();
     this.getParticipant();
+    this.getEquipment();
+  }
+
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "hideListItem");
+    document.getElementById("EW").setAttribute("class", "hideListItem");
+    document.getElementById("AP").setAttribute("class", "hideListItem");
+    document.getElementById("EP").setAttribute("class", "showListItem");
+    document.getElementById("EPh").setAttribute("href", `/participants/${this.route.snapshot.params.id}`);
+    document.getElementById("AE").setAttribute("class", "showListItem");
+    document.getElementById("AEh").setAttribute("href", `/new-equipment/${this.route.snapshot.params.id}`);
+    document.getElementById("EE").setAttribute("class", "hideListItem");
   }
 
   getParticipant() {
@@ -41,7 +53,6 @@ export class ViewParticipantComponent implements OnInit {
           this.workshop = result[0];
           this.workshop.start = result[0].start.substring(0,10);          
           this.workshop.end = result[0].end.substring(0,10);
-          this.getEquipment();
         },
         error => {
           console.log(error);
@@ -62,48 +73,33 @@ export class ViewParticipantComponent implements OnInit {
       );
   }
 
-  addEquipment() {
-    this.router.navigate([`/new-equipment/${this.source}/${this.route.snapshot.params.id}`]);
-  }
-
-  toWorkshop() {
-    this.router.navigate([`/workshop/${this.workshop.id}`]);
-  }
-
   deleteParticipant() {
     this.server.deleteParticipant(this.participant)
       .subscribe(
         result => {
           console.log(result);
-          this.server.updateWorkshopCount(this.route.snapshot.params.id, {})
-          .subscribe(
-            response => {
-              console.log(response);
-              if (this.source == 4) 
-                this.toWorkshop();
-              else if (this.source == 3)
-                this.router.navigate([`/equipment`]);          
-              else
-                this.router.navigate([`/participants`]);          
-            },
-            error => {
-              console.log(error);
-            }
-          );
+          if (this.workshop.id != -1) {
+            this.server.updateWorkshopCount(this.workshop.id, {})
+            .subscribe(
+              response => {
+                console.log(response);
+                this.router.navigate([`/workshop/${this.workshop.id}`]);
+              },
+              error => {
+                console.log(error);
+              }
+            );
+          }
         },
         error => {
           console.log(error);
         }
       );
-  }
-
-  editParticipant() {
-    this.router.navigate([`/participants/${this.source}/${this.participant.id}`]);
+      this.router.navigate([`/participants`]);
   }
 
   viewEquipment(equipment) {
-    this.source = this.source * 10 + 5;
-    this.router.navigate([`/equipment/${this.source}/${equipment.id}`]);
+    this.router.navigate([`/equipment/${equipment.id}`]);
   }
 
 }

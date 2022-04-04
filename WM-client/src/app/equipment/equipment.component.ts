@@ -15,7 +15,18 @@ export class EquipmentComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.setNavigation();
     this.getEquipment();
+  }
+
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "hideListItem");
+    document.getElementById("EW").setAttribute("class", "hideListItem");
+    document.getElementById("AP").setAttribute("class", "hideListItem");
+    document.getElementById("EP").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "showListItem");
+    document.getElementById("AEh").setAttribute("href", `/new-equipment/-1`);
+    document.getElementById("EE").setAttribute("class", "hideListItem");
   }
 
   getEquipment() {
@@ -33,11 +44,7 @@ export class EquipmentComponent implements OnInit {
   }
 
   viewEquipment(equipment) {
-    this.router.navigate([`/equipment/3/${equipment.id}`]);
-  }
-
-  addEquipment() {
-    this.router.navigate([`/new-equipment/3/0`]);
+    this.router.navigate([`/equipment/${equipment.id}`]);
   }
 
 }

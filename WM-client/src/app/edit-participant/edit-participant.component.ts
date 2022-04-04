@@ -9,9 +9,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./edit-participant.component.css']
 })
 export class EditParticipantComponent implements OnInit {
+  workshops: any[] = [];
   participant = null;
+  originalWS = 0;
   form: FormGroup;
-  source = this.route.snapshot.params.source;
 
   constructor(
     private server: ServerService,
@@ -19,7 +20,31 @@ export class EditParticipantComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.setNavigation();
     this.getParticipant();
+    this.getWorkshops();
+  }
+
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "hideListItem");
+    document.getElementById("EW").setAttribute("class", "hideListItem");
+    document.getElementById("AP").setAttribute("class", "hideListItem");
+    document.getElementById("EP").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "hideListItem");
+    document.getElementById("EE").setAttribute("class", "hideListItem");
+  }
+
+  getWorkshops() {
+    this.server.getWorkshops("all")
+      .subscribe(
+        result => {
+          this.workshops = result;
+          console.log(result);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   getParticipant() {
@@ -27,6 +52,9 @@ export class EditParticipantComponent implements OnInit {
       .subscribe(
         result => {
           this.participant = result[0];
+          if (this.participant.workshop_id == null)
+            this.participant.workshop_id = -1;
+          this.originalWS = this.participant.workshop_id;
           console.log(result);
         },
         error => {
@@ -40,10 +68,29 @@ export class EditParticipantComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          if (this.participant.workshop_id == null)
-            this.router.navigate([`/participants`]);
-          else
-            this.router.navigate([`/participant/${this.source}/${this.participant.id}`]);
+          if (this.originalWS != this.participant.workshop_id) {
+            if (this.originalWS != -1)
+              this.server.updateWorkshopCount(this.originalWS, {})
+              .subscribe(
+                response => {
+                  console.log(response);
+                },
+                error => {
+                  console.log(error);
+                }
+              );
+              if (this.participant.workshop_id != -1)
+              this.server.updateWorkshopCount(this.participant.workshop_id, {})
+              .subscribe(
+                response => {
+                  console.log(response);
+                },
+                error => {
+                  console.log(error);
+                }
+              );
+          }
+          this.router.navigate([`/participant/${this.participant.id}`]);
         },
         error => {
           console.log(error);

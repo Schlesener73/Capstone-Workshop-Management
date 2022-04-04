@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerService } from 'src/app/server.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-workshop',
@@ -16,15 +17,28 @@ export class AddWorkshopComponent implements OnInit {
     numofpart: 0,
     frequency: ''
   };
+  form: FormGroup;
+  editMode: string;
 
   constructor(
     private server: ServerService,
+    private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
+    this.setNavigation();
   }
 
-  createWorkshop() {
+  setNavigation() {
+    document.getElementById("AW").setAttribute("class", "hideListItem");
+    document.getElementById("EW").setAttribute("class", "hideListItem");
+    document.getElementById("AP").setAttribute("class", "hideListItem");
+    document.getElementById("EP").setAttribute("class", "hideListItem");
+    document.getElementById("AE").setAttribute("class", "hideListItem");
+    document.getElementById("EE").setAttribute("class", "hideListItem");
+  }
+
+  saveWorkshop() {
     const data = {
       start: this.workshop.start,
       end: this.workshop.end,
@@ -33,20 +47,16 @@ export class AddWorkshopComponent implements OnInit {
       numofpart: 0,
       frequency: this.workshop.frequency
     };
-
-    this.server.addWorkshop(data)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.router.navigate(['/workshops']);
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    this.server.addWorkshop(this.workshop)
+    .subscribe(
+      response => {
+        console.log(response);
+        this.router.navigate(['/workshops']);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
-  cancel() {
-    this.router.navigate(['/workshops']);
-  }
 }
