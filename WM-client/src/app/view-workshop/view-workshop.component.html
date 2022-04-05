@@ -1,52 +1,58 @@
-<div>
-    <div><table class="center">
-        <tr>
-            <th>Workshop Dates</th>
-            <th>Meet</th>
-            <th>Location</th>
-            <th>Participants</th>
-        </tr>
-        <tr>
-            <td>{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</td>
-            <td>{{workshop.frequency}} {{workshop.meet | string2ampm}}</td>
-            <td>{{workshop.location}}</td>
-            <td>{{workshop.numofpart}}</td>
-        </tr>
-    </table></div>
-<br><br>
-    <table class="center">
-        <tr>
-            <th>Participant Name</th>
-            <th>Address</th>
-            <th>Email</th>
-            <th>Phone</th>
-        </tr>
-       <tr *ngFor="let participant of participants">
-            <td><a href="javascript:void(0);" (click)="viewParticipant(participant)">{{participant.last_name}}, {{participant.first_name}}</a></td>
-            <td>{{participant.address}}, {{participant.city}}, {{participant.state}}  {{participant.zip}}</td>
-            <td>{{participant.email}}</td>
-            <td>{{participant.phone | phone}}</td>
-        </tr>
-    </table>
-<br><br>
-    <div><table class="center">
-        <tr>
-            <th>Equipment Name</th>
-            <th>Storage Location</th>
-            <th>Year</th>
-            <th>Condition</th>
-        </tr>
-        <tr *ngFor="let equip of equipment">
-            <td><a href="javascript:void(0);" (click)="viewEquipment(equip)">{{equip.name}}</a></td>            <td>{{equip.storage_loc}}</td>
-            <td>{{equip.year}}</td>
-            <td>{{equip.eq_condition}}</td>
+<div class="grid-container">
+    <div class="section1">
+        <table class="center">
+            <tr>
+                <th>Workshop Dates</th>
+                <th>Meet</th>
+                <th>Location</th>
+                <th>Participants</th>
             </tr>
-    </table></div>
+            <tr>
+                <td>{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</td>
+                <td>{{workshop.frequency}} {{workshop.meet | string2ampm}}</td>
+                <td>{{workshop.location}}</td>
+                <td>{{workshop.numofpart}}</td>
+            </tr>
+        </table>
+        <br><br>
+    </div>
+    <div class="section2">
+        <table class="section2 center">
+            <tr>
+                <th>Participant Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        <tr *ngFor="let participant of participants">
+                <td><a href="javascript:void(0);" (click)="viewParticipant(participant)">{{participant.last_name}}, {{participant.first_name}}</a></td>
+                <td>{{participant.address}}, {{participant.city}}, {{participant.state}}  {{participant.zip}}</td>
+                <td>{{participant.email}}</td>
+                <td>{{participant.phone | phone}}</td>
+            </tr>
+        </table>
+        <br><br>
+    </div>
+    <div class="section3">
+        <table class="center">
+            <tr>
+                <th>Equipment Name</th>
+                <th>Storage Location</th>
+                <th>Year</th>
+                <th>Condition</th>
+            </tr>
+            <tr *ngFor="let equip of equipment">
+                <td><a href="javascript:void(0);" (click)="viewEquipment(equip)">{{equip.name}}</a></td>            <td>{{equip.storage_loc}}</td>
+                <td>{{equip.year}}</td>
+                <td>{{equip.eq_condition}}</td>
+            </tr>
+        </table>
+    </div>
 
-    <div >
+    <div class="right-menu">
         <div>
-            <button type="button" class="btn btn-primary" (click)="deleteWorkshop()"><i class="fa fa-trash"></i> Workshop</button>
+            <a class="btn delIcon" (click)="deleteWorkshop()"><i class="fa fa-trash fa-2x"></i></a>
         </div>
-    </div>  
+    </div>
 
 </div>

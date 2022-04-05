@@ -47,7 +47,6 @@ export class ParticipantsComponent implements OnInit {
           console.log(error);
         }
       );
-
   }
 
   viewParticipant(participant) {

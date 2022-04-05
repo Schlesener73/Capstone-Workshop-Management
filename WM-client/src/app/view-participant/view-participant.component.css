@@ -1,6 +1,6 @@
 .grid-container {
     display: grid;
-    grid-template-columns: 20% 40% 40%;
+    grid-template-columns: 15% 40% 32% 13%;
     grid-gap: 10px;
     background-color: white;
     padding: 10px;
@@ -13,27 +13,32 @@
     font-size: 18px;
 }
   
-.left-menu {
+.right-menu {
     grid-row-start: 1;
     grid-row-end: 4;
+    grid-column-start: 4;
 }
-  
+
 .section1 {
     color: black;
+    grid-column-start: 2;
+    grid-column-end: 3;
 }  
 
 .section2 {
     color: black;
+    grid-column-start: 3;
+    grid-column-end: 4;
 }  
   
 .section3 {
-    grid-column-start: 2;
-    grid-column-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 5;
 }  
 
 .section4 {
-    grid-column-start: 2;
-    grid-column-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 5;
 }  
 
 table.center {
@@ -67,4 +72,8 @@ td, th {
 .fieldData {
     text-align: left;
     padding: 0px 0px 0px 20px;
+}
+
+.delIcon {
+    background-color: white;
 }

@@ -4,6 +4,14 @@
     <form [formGroup]="equipmentForm" (ngSubmit)="createEquipment(equipmentForm)">
 
         <div class="form-group">
+            <label>Participant</label>
+            <select formControlName="participant_id" class="form-control">
+                <option value="-1">Not Checked Out</option>
+                <option *ngFor="let participant of participants" value="{{participant.id}}">{{participant.last_name}}, {{participant.first_name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
             <label>Name</label>
             <input
                 type="text"

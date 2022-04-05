@@ -1,6 +1,6 @@
 .grid-container {
     display: grid;
-    grid-template-columns: 25% 25% 25% 20%;
+    grid-template-columns: 27% 30% 30% 13%;
     grid-gap: 10px;
     background-color: white;
     padding: 10px;
@@ -70,4 +70,8 @@ td, th {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
+}
+
+.delIcon {
+    background-color: white;
 }

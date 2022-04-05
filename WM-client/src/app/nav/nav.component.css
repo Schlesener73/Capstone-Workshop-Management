@@ -68,3 +68,18 @@ li a:hover {
   background-position: 100%;
   color: blue;
 }
+
+ul li:nth-last-child(1)
+{
+ float: right;
+}
+
+ul li:nth-last-child(2)
+{
+ float: right;
+}
+
+ul li:nth-last-child(3)
+{
+ float: right;
+}

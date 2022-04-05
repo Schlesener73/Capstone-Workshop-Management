@@ -2,7 +2,7 @@
     <div class="image-section">
         <table>
             <tr>
-                <td><img src="{{imagePath}}/{{equipment.image}}"></td>
+                <td><img src="{{imagePath}}/{{equipment.image}}" width="100%" alt=""></td>
             </tr>
         </table>
     </div>
@@ -72,7 +72,7 @@
 
     <div class="right-menu">
         <div>
-            <button type="button" class="btn btn-primary" (click)="deleteEquipment()"><i class="fa fa-trash"></i> Equipment</button>
+            <a class="btn delIcon" (click)="deleteEquipment()"><i class="fa fa-trash fa-2x"></i></a>
         </div>
     </div>  
         

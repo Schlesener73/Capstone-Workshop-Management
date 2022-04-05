@@ -51,12 +51,13 @@
             </tr>
     </table></div>
 
-    <div class="left-menu">
+    <div class="right-menu">
         <ng-template [ngIf]="(equipment == '')">
-            <br>
-            <div>
-                <button type="button" class="btn btn-primary" (click)="deleteParticipant()"><i class="fa fa-trash"></i> Delete Participant</button>
-            </div>
+            <div class="right-menu">
+                <div>
+                    <a class="btn delIcon" (click)="deleteParticipant()"><i class="fa fa-trash fa-2x"></i></a>
+                </div>
+            </div> 
         </ng-template>
     </div>  
     

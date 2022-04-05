@@ -10,13 +10,15 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 })
 
 export class AddEquipmentComponent implements OnInit {
+  participants: any[] = [];
   fileInputLabel: string;
   equipmentForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
     storage_loc: ['', Validators.required],
     year: '',
     image: [''],
-    eq_condition: ''
+    eq_condition: '',
+    participant_id: this.route.snapshot.params.participantID
   });
 
   constructor(
@@ -27,6 +29,7 @@ export class AddEquipmentComponent implements OnInit {
 
   ngOnInit() {
     this.setNavigation();
+    this.getParticipants();
   }
 
   setNavigation() {
@@ -43,7 +46,20 @@ export class AddEquipmentComponent implements OnInit {
     for (let i = 0; i < fixedMenu.length; i++) {
       fixedMenu[i].setAttribute("style", "display:inline;");
     }
-}
+  }
+
+  getParticipants() {
+    this.server.getParticipants()
+      .subscribe(
+        result => {
+          this.participants = result;
+          console.log(result);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
 
   onFileSelect(event) {
     const file = event.target.files[0];
@@ -70,7 +86,7 @@ export class AddEquipmentComponent implements OnInit {
           console.log(error);
         }
       );
-    this.server.addEquipment(data, this.route.snapshot.params.participantID)
+    this.server.addEquipment(data, form.value.participant_id)
     .subscribe(
       response => {
        if (this.route.snapshot.params.participantID == -1)

@@ -471,18 +471,34 @@ function createRouter(db) {
 
   // update equipment
   router.put('/equipment/:id', function(req, res, next) {
-    db.query(
-      'UPDATE equipment SET name=?, storage_loc=?, year=?, image=?, eq_condition=? WHERE id=?',
-      [req.body.name, req.body.storage_loc, req.body.year, req.body.image, req.body.eq_condition, req.params.id],
-        (error) => {
-          if (error) {
-            console.error(error);
-            res.status(500).json({status: 'error'});
-          } else {
-            res.status(200).json({status: 'ok'});
+    // image=?, req.body.image, 
+    if (req.body.partipant_id != -1) {
+      db.query(
+        'UPDATE equipment SET name=?, storage_loc=?, year=?, eq_condition=?, participant_id=? WHERE id=?',
+        [req.body.name, req.body.storage_loc, req.body.year, req.body.eq_condition, req.body.partipant_id, req.params.id],
+          (error) => {
+            if (error) {
+              console.error(error);
+              res.status(500).json({status: 'error'});
+            } else {
+              res.status(200).json({status: 'ok'});
+            }
           }
-        }
-    );
+      );
+    } else {
+      db.query(
+        'UPDATE equipment SET name=?, storage_loc=?, year=?, eq_condition=?, participant_id=NULL WHERE id=?',
+        [req.body.name, req.body.storage_loc, req.body.year, req.body.eq_condition, req.params.id],
+          (error) => {
+            if (error) {
+              console.error(error);
+              res.status(500).json({status: 'error'});
+            } else {
+              res.status(200).json({status: 'ok'});
+            }
+          }
+      );
+    }
   });
 
   // update workshop count
