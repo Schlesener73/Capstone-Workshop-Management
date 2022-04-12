@@ -28,38 +28,38 @@
         </table>
     </div>
 
-    <div class="section3">
+    <div class="section3" *ngIf="equipment.participant_id != null">
         <table>
             <tr>
                 <td><b>Participant Name:</b>&nbsp;&nbsp;<a href="/participant/{{this.participant.id}}">{{participant.last_name}}, {{participant.first_name}}</a></td>
             </tr>
             <tr>
-                <td><b>Address:</b>&nbsp;&nbsp;{{participant.address}}, {{participant.city}}, {{participant.state}}  {{participant.zip}}</td>
+                <td><b>Address:&nbsp;&nbsp;</b>{{participant.address}}<span *ngIf="participant.address != null && participant.address != ''">, </span>{{participant.city}}<span *ngIf="participant.city != null && participant.city != ''">, </span>{{participant.state}}  {{participant.zip}}</td>
             </tr>
         </table>
     </div>
-    <div class="section4">
+    <div class="section4" *ngIf="equipment.participant_id != null">
         <table>
             <tr>
                 <td><b>Email:</b>&nbsp;&nbsp;{{participant.email}}</td>
             </tr>
             <tr>
-                <td><b>Phone:</b>&nbsp;&nbsp;{{participant.phone | phone}}</td>
+                <td><b>Phone:&nbsp;&nbsp;</b><span *ngIf="participant.phone != null && participant.phone != ''">{{participant.phone | phone}}</span></td>
             </tr>
         </table>
     </div>
 
-    <div class="section5">
+    <div class="section5" *ngIf="participant.workshop_id != null">
         <table>
             <tr>
-                <td><b>Workshop Dates:</b>&nbsp;&nbsp;<a href="/workshop/{{workshop.id}}">{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</a></td>
+                <td><b>Workshop Dates:</b>&nbsp;&nbsp;<a href="/workshop/{{workshop.id}}">{{workshop.start | date:'MMMM d, y'}} - {{workshop.end | date:'MMMM d, y'}}</a></td>
             </tr>
             <tr>
                 <td><b>Meet:</b>&nbsp;&nbsp;{{workshop.frequency}} {{workshop.meet | string2ampm}}</td>
             </tr>
         </table>
     </div>
-    <div class="section6">
+    <div class="section6" *ngIf="participant.workshop_id != null">
         <table>
             <tr>
                 <td><b>Location:</b>&nbsp;&nbsp;{{workshop.location}}</td>

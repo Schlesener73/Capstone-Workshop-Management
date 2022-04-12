@@ -15,7 +15,7 @@
         <th>Frequency</th>
     </tr>
     <tr *ngFor="let workshop of workshops">
-        <td><a href="javascript:void(0);" (click)="viewWorkshop(workshop)">{{workshop.start | date:'M/d/yy'}} - {{workshop.end | date:'M/d/yy'}}</a></td>
+        <td><a href="javascript:void(0);" (click)="viewWorkshop(workshop)">{{workshop.start | date:'MMMM d, y'}} - {{workshop.end | date:'MMMM d, y'}}</a></td>
         <td>{{workshop.meet | string2ampm}}</td>
         <td>{{workshop.location}}</td>
         <td>{{workshop.numofpart}}</td>

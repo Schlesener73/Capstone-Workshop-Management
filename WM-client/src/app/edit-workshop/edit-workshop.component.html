@@ -1,67 +1,55 @@
 <div style="width: 500px; margin: auto;">
-    <h4>Edit Workshop</h4>
-        <form>
-            <div class="form-group">
-                <label for="start">Start Date</label>
-                <input
-                    type="date"
-                    class="form-control"
-                    id="start"
-                    required
-                    [(ngModel)]="workshop.start"
-                    name="start"
-                />
-            </div>
+    <h4 text-align="center">Edit Workshop</h4>
 
-            <div class="form-group">
-                <label for="end">End Date</label>
-                <input
-                    type="date"
-                    class="form-control"
-                    id="end"
-                    required
-                    [(ngModel)]="workshop.end"
-                    name="end"
-                />
-            </div>
+    <form [formGroup]="workshopForm" (ngSubmit)="saveWorkshop(workshopForm)">
 
-            <div class="form-group">
-                <label for="meet">Meeting Time</label>
-                <input
-                    type="time"
-                    class="form-control"
-                    id="meet"
-                    required
-                    [(ngModel)]="workshop.meet"
-                    name="meet"
-                />
-            </div>
+        <div class="form-group">
+            <label>Start Date</label>
+            <input
+                type="date"
+                formControlName="start"
+                class="form-control"
+            />
+        </div>
 
-            <div class="form-group">
-                <label for="location">Location</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="location"
-                    required
-                    [(ngModel)]="workshop.location"
-                    name="location"
-                />
-            </div>
+        <div class="form-group">
+            <label>End Date</label>
+            <input
+                type="date"
+                formControlName="end"
+                class="form-control"
+            />
+        </div>
 
-            <div class="form-group">
-                <label for="frequency">Frequency</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="frequency"
-                    required
-                    [(ngModel)]="workshop.frequency"
-                    name="frequency"
-                />
-            </div>
-        </form>
+        <div class="form-group">
+            <label>Meeting Time</label>
+            <input
+                type="time"
+                formControlName="meet"
+                class="form-control"
+            />
+        </div>
 
-    <div text-align="center"><button (click)="saveWorkshop()" class="btn btn-success">Submit</button></div>
+        <div class="form-group">
+            <label>Location</label>
+            <input
+                type="text"
+                formControlName="location"
+                class="form-control"
+            />
+        </div>
+
+        <div class="form-group">
+            <label>Frequency</label>
+            <input
+                type="text"
+                formControlName="frequency"
+                class="form-control"
+            />
+        </div>
+
+        <button type="submit" [disabled]="!workshopForm.valid">Submit</button>
+
+    </form>
 
 </div>

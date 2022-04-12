@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerService } from '../server.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavbarService } from '../services/navbar.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-view-participant',
@@ -8,12 +10,48 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./view-participant.component.css']
 })
 export class ViewParticipantComponent implements OnInit {
+  wsShow: boolean;
+  nwsShow: boolean;
+  ewsShow: boolean;
+
+  ptShow: boolean;
+  aptShow: boolean;
+
+  eptShow: boolean;
+  eptRoute: string;
+  eqShow: boolean;
+  aeqShow: boolean;
+  aeqRoute: string;
+  eeqShow: boolean;
+
+  liShow: boolean;
+  regShow: boolean;
+  loShow: boolean;
+  subscription1: Subscription;
+  subscription2: Subscription;
+  subscription3: Subscription;
+
+  subscription5: Subscription;
+  subscription6: Subscription;
+
+  subscription8: Subscription;
+  subscription9: Subscription;
+  subscription10: Subscription;
+  subscription11: Subscription;
+  subscription12: Subscription;
+  subscription13: Subscription;
+
+  subscription15: Subscription;
+  subscription16: Subscription;
+  subscription17: Subscription;
+
   participant = null;
   equipment = null;
   workshop = null;
   
   constructor(private server: ServerService,
     private route: ActivatedRoute,
+    private navbar: NavbarService,
     private router: Router) { }
 
   ngOnInit() {
@@ -22,22 +60,61 @@ export class ViewParticipantComponent implements OnInit {
     this.getEquipment();
   }
 
+  ngOnDestroy() {
+    this.subscription1.unsubscribe();
+    this.subscription2.unsubscribe();
+    this.subscription3.unsubscribe();
+
+    this.subscription5.unsubscribe();
+    this.subscription6.unsubscribe();
+
+    this.subscription8.unsubscribe();
+    this.subscription9.unsubscribe();
+    this.subscription10.unsubscribe();
+    this.subscription11.unsubscribe();
+    this.subscription12.unsubscribe();
+    this.subscription13.unsubscribe();
+
+    this.subscription15.unsubscribe();
+    this.subscription16.unsubscribe();
+    this.subscription17.unsubscribe();
+  }
+
   setNavigation() {
-    document.getElementById("AW").setAttribute("class", "hideListItem");
-    document.getElementById("EW").setAttribute("class", "hideListItem");
-    document.getElementById("AP").setAttribute("class", "hideListItem");
-    document.getElementById("EP").setAttribute("class", "showListItem");
-    document.getElementById("EPh").setAttribute("href", `/participants/${this.route.snapshot.params.id}`);
-    document.getElementById("AE").setAttribute("class", "showListItem");
-    document.getElementById("AEh").setAttribute("href", `/new-equipment/${this.route.snapshot.params.id}`);
-    document.getElementById("EE").setAttribute("class", "hideListItem");
-    document.getElementById("LI").setAttribute("class", "hideListItem");
-    document.getElementById("REG").setAttribute("class", "hideListItem");
-    document.getElementById("LO").setAttribute("class", "showListItem");
-    const fixedMenu = document.getElementsByClassName("menu");
-    for (let i = 0; i < fixedMenu.length; i++) {
-      fixedMenu[i].setAttribute("style", "display:inline;");
-    }
+    this.subscription1 = this.navbar.wsDisplay.subscribe(wsShow => this.wsShow = wsShow);
+    this.subscription2 = this.navbar.nwsDisplay.subscribe(nwsShow => this.nwsShow = nwsShow);
+    this.subscription3 = this.navbar.ewsDisplay.subscribe(ewsShow => this.ewsShow = ewsShow);
+
+    this.subscription5 = this.navbar.ptDisplay.subscribe(ptShow => this.ptShow = ptShow);
+    this.subscription6 = this.navbar.aptDisplay.subscribe(aptShow => this.aptShow = aptShow);
+
+    this.subscription8 = this.navbar.eptDisplay.subscribe(eptShow => this.eptShow = eptShow);
+    this.subscription9 = this.navbar.eptRouter.subscribe(eptRoute => this.eptRoute = eptRoute);
+    this.subscription10 = this.navbar.eqDisplay.subscribe(eqShow => this.eqShow = eqShow);
+    this.subscription11 = this.navbar.aeqDisplay.subscribe(aeqShow => this.aeqShow = aeqShow);
+    this.subscription12 = this.navbar.aeqRouter.subscribe(aeqRoute => this.aeqRoute = aeqRoute);
+    this.subscription13 = this.navbar.eeqDisplay.subscribe(eeqShow => this.eeqShow = eeqShow);
+
+    this.subscription15 = this.navbar.liDisplay.subscribe(liShow => this.liShow = liShow);
+    this.subscription16 = this.navbar.regDisplay.subscribe(regShow => this.regShow = regShow);
+    this.subscription17 = this.navbar.loDisplay.subscribe(loShow => this.loShow = loShow); 
+    this.navbar.changeWSdisplay(true);
+    this.navbar.changeNWSdisplay(false);
+    this.navbar.changeEWSdisplay(false);
+
+    this.navbar.changePTdisplay(true);
+    this.navbar.changeAPTdisplay(false);
+
+    this.navbar.changeEPTdisplay(true);
+    this.navbar.changeEPTrouter(`/participants/${this.route.snapshot.params.id}`);
+    this.navbar.changeEQdisplay(true);
+    this.navbar.changeAEQdisplay(true);
+    this.navbar.changeAEQrouter(`/new-equipment/${this.route.snapshot.params.id}`);
+    this.navbar.changeEEQdisplay(false);
+
+    this.navbar.changeLIdisplay(false);
+    this.navbar.changeREGdisplay(false);
+    this.navbar.changeLOdisplay(true);
   }
 
   getParticipant() {
@@ -45,7 +122,8 @@ export class ViewParticipantComponent implements OnInit {
       .subscribe(
         result => {
           this.participant = result[0];
-          this.getWorkshop();
+          if (this.participant.workshop_id != null)
+            this.getWorkshop();
         },
         error => {
           console.log(error);

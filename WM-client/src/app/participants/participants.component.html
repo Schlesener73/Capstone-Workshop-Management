@@ -1,3 +1,10 @@
+<div class="options">
+    <select (change)="setSelection($event)">
+        <option value="all">All</option>
+        <option value="assigned">Assigned</option>
+        <option value="unassigned">Unassigned</option>
+    </select>
+</div>
 <div>
     <table class="center">
         <tr>
@@ -8,9 +15,9 @@
         </tr>
         <tr *ngFor="let participant of participants">
             <td><a href="javascript:void(0);" (click)="viewParticipant(participant)">{{participant.last_name}}, {{participant.first_name}}</a></td>
-            <td>{{participant.address}}, {{participant.city}}, {{participant.state}}  {{participant.zip}}</td>
+            <td>{{participant.address}}<span *ngIf="participant.address != null && participant.address != ''">, </span>{{participant.city}}<span *ngIf="participant.city != null && participant.city != ''">, </span>{{participant.state}}  {{participant.zip}}</td>
             <td>{{participant.email}}</td>
-            <td>{{participant.phone | phone}}</td>
+            <td><span *ngIf="participant.phone != null && participant.phone != ''">{{participant.phone | phone}}</span></td>
         </tr>
     </table>
 

@@ -21,3 +21,7 @@ td, th {
     position: fixed;
     left: 10px;
 }
+
+a {
+    color: rgb(22, 49, 99);
+}

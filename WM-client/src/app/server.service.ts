@@ -78,12 +78,22 @@ export class ServerService {
     return this.http.get(`${environment.serverUrl}/equipment/${id}`);
   }
 
-  getParticipants(): Observable<any> {
-    return this.http.get(`${environment.serverUrl}/participants`);
+  getParticipants(option): Observable<any> {
+    if (option == "all")
+      return this.http.get(`${environment.serverUrl}/participants`);
+    else if (option == "assigned")
+      return this.http.get(`${environment.serverUrl}/participants/view/assigned`);
+    else
+      return this.http.get(`${environment.serverUrl}/participants/view/unassigned`);
   }
 
-  getEquipment(): Observable<any> {
-    return this.http.get(`${environment.serverUrl}/equipment`);
+  getEquipment(option): Observable<any> {
+    if (option == "all")
+      return this.http.get(`${environment.serverUrl}/equipment`);
+    else if (option == "checked")
+      return this.http.get(`${environment.serverUrl}/equipment/view/checked`);
+    else
+      return this.http.get(`${environment.serverUrl}/equipment/view/unchecked`);
   }
 
   getWorkshopEquip(id): Observable<any> {

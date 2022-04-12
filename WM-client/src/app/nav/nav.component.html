@@ -3,18 +3,18 @@
     </div>
     <div class="menu-bar">
         <ul id="nav-bar">
-            <li class="menu"><a routerLink="/workshops">WORKSHOPS</a></li>
-            <li id="AW" class="hideListItem"><a routerLink="/new-workshop"><i class="fa fa-plus"></i> WORKSHOP</a></li>
-            <li id="EW" class="hideListItem"><a id="EWh"><i class="fa fa-edit"></i> WORKSHOP</a></li>
-            <li class="menu"><a routerLink="/participants">PARTICIPANTS</a></li>
-            <li id="AP" class="hideListItem"><a id="APh" href=""><i class="fa fa-plus"></i> PARTICIPANT</a></li>
-            <li id="EP" class="hideListItem"><a id="EPh" href=""><i class="fa fa-edit"></i> PARTICIPANT</a></li>
-            <li class="menu"><a routerLink="/equipment">EQUIPMENT</a></li>
-            <li id="AE" class="hideListItem"><a id="AEh" href=""><i class="fa fa-plus"></i> EQUIPMENT</a></li>
-            <li id="EE" class="hideListItem"><a id="EEh" href=""><i class="fa fa-edit"></i> EQUIPMENT</a></li>
-            <li id="LI" class="hideListItem"><a routerLink="/login">LOGIN</a></li>
-            <li id="REG" class="hideListItem"><a routerLink="/register">REGISTER</a></li>
-            <li id="LO" class="hideListItem"><a class="btn" (click)="logout()">LOGOUT</a></li>
+            <li><a routerLink="/workshops" *ngIf="wsShow">WORKSHOPS</a></li>
+            <li><a routerLink="/new-workshop" *ngIf="nwsShow"><i class="fa fa-plus"></i> WORKSHOP</a></li>
+            <li><a routerLink="{{ewsRoute}}" *ngIf="ewsShow"><i class="fa fa-edit"></i> WORKSHOP</a></li>
+            <li><a routerLink="/participants" *ngIf="ptShow">PARTICIPANTS</a></li>
+            <li><a routerLink="{{aptRoute}}" *ngIf="aptShow"><i class="fa fa-plus"></i> PARTICIPANT</a></li>
+            <li><a routerLink="{{eptRoute}}" *ngIf="eptShow"><i class="fa fa-edit"></i> PARTICIPANT</a></li>
+            <li><a routerLink="/equipment" *ngIf="eqShow">EQUIPMENT</a></li>
+            <li><a routerLink="{{aeqRoute}}" *ngIf="aeqShow"><i class="fa fa-plus"></i> EQUIPMENT</a></li>
+            <li><a routerLink="{{eeqRoute}}" *ngIf="eeqShow"><i class="fa fa-edit"></i> EQUIPMENT</a></li>
+            <li><a routerLink="/login" *ngIf="liShow">LOGIN</a></li>
+            <li><a routerLink="/register" *ngIf="regShow">REGISTER</a></li>
+            <li><a class="btn" (click)="logout()" *ngIf="loShow">LOGOUT</a></li>
         </ul>
     </div>
 </div>

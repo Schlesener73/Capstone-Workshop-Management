@@ -59,18 +59,19 @@ function createRouter(db) {
   router.post('/login', async function (req, res, next) {
     try {
       let { username, password } = req.body; 
+      console.log(req.body.password);
       const hashed_password = md5(password.toString())
+      console.log(hashed_password);
       const sql = `SELECT * FROM users WHERE username = ? AND password = ?`
       db.query(
         sql, [username, hashed_password],
-      function(err, result, fields){
-        if(err){
-          res.send({ status: 0, data: err });
-        }else{
-          let token = jwt.sign({ data: result }, 'secret')
-          res.send({ status: 1, data: result, token: token });
-        }
-       
+        function(err, result, fields){
+          if(err || result[0] == null) {
+            res.send({ status: 0, data: err });
+          } else {
+            let token = jwt.sign({ data: result }, 'secret')
+            res.send({ status: 1, data: result, token: token });
+          }
       })
     } catch (error) {
       res.send({ status: 0, error: error });
@@ -174,10 +175,70 @@ function createRouter(db) {
     );
   });
 
+  // list assigned participants
+  router.get('/participants/view/assigned', function (req, res, next) {
+    db.query(
+      'SELECT * FROM participants WHERE workshop_id IS NOT NULL ORDER BY last_name, first_name',
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json(results);
+        }
+      }
+    );
+  });
+  
+  // list unassigned participants
+  router.get('/participants/view/unassigned', function (req, res, next) {
+    db.query(
+      'SELECT * FROM participants WHERE workshop_id IS NULL ORDER BY last_name, first_name',
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json(results);
+        }
+      }
+    );
+  });
+  
   // list equipment
   router.get('/equipment', function (req, res, next) {
     db.query(
       'SELECT * FROM equipment ORDER BY name',
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json(results);
+        }
+      }
+    );
+  });
+
+  // list equipment checked out
+  router.get('/equipment/view/checked', function (req, res, next) {
+    db.query(
+      'SELECT * FROM equipment WHERE participant_id IS NOT NULL ORDER BY name',
+      (error, results) => {
+        if (error) {
+          console.log(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json(results);
+        }
+      }
+    );
+  });
+
+  // list equipment not checked out
+  router.get('/equipment/view/unchecked', function (req, res, next) {
+    db.query(
+      'SELECT * FROM equipment WHERE participant_id IS NULL ORDER BY name',
       (error, results) => {
         if (error) {
           console.log(error);
@@ -452,8 +513,6 @@ function createRouter(db) {
     }
   });
 
-  // assign equipment
-
   // delete equipment from participant
   router.delete('/equipment/:id', function(req, res, next) {
     db.query(
@@ -472,10 +531,10 @@ function createRouter(db) {
   // update equipment
   router.put('/equipment/:id', function(req, res, next) {
     // image=?, req.body.image, 
-    if (req.body.partipant_id != -1) {
+    if (req.body.participant_id != -1) {
       db.query(
         'UPDATE equipment SET name=?, storage_loc=?, year=?, eq_condition=?, participant_id=? WHERE id=?',
-        [req.body.name, req.body.storage_loc, req.body.year, req.body.eq_condition, req.body.partipant_id, req.params.id],
+        [req.body.name, req.body.storage_loc, req.body.year, req.body.eq_condition, req.body.participant_id, req.params.id],
           (error) => {
             if (error) {
               console.error(error);
