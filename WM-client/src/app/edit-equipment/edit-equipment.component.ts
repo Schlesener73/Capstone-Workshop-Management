@@ -54,7 +54,7 @@ export class EditEquipmentComponent implements OnInit {
   equipmentForm: FormGroup = this.fb.group({
     name: [null, [Validators.required, Validators.minLength(1)]],
     storage_loc: null,
-    year: [null, Validators.pattern('[19|20][0-9]{2}')],
+    year: [null, Validators.pattern('[12][0-9]{3}')],
 //    image: [''],
     eq_condition: null,
     participant_id: this.route.snapshot.params.participantID
