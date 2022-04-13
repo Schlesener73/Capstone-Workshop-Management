@@ -148,36 +148,61 @@ export class AddEquipmentComponent implements OnInit {
   }
 
   createEquipment(form) {
+    var filename = this.equipmentForm.get('image').value;
     const formData = new FormData();
-    formData.append('uploadedImage', this.equipmentForm.get('image').value);
-    const data = {
-      name: form.value.name,
-      storage_loc: form.value.storage_loc,
-      year: form.value.year,
-      image: form.value.image.substring(12),
-      eq_condition: form.value.eq_condition,
-    };
-    this.server.uploadFile(formData)
-      .subscribe(
-        response => {
-          console.log(response);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    this.server.addEquipment(data, form.value.participant_id)
-    .subscribe(
-      response => {
-       if (this.route.snapshot.params.participantID == -1)
-          this.router.navigate([`/equipment`]);
-        else 
-          this.router.navigate([`/participant/${this.route.snapshot.params.participantID}`]);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    if (filename != '' && filename != null) {
+      formData.append('uploadedImage', filename);
+      this.server.uploadFile(formData)
+        .subscribe(
+          response => {
+            console.log(response);
+            filename = response.uploadedFile.filename;
+            const data = {
+              name: form.value.name,
+              storage_loc: form.value.storage_loc,
+              year: form.value.year,
+              image: filename,
+              eq_condition: form.value.eq_condition,
+            };
+            this.server.addEquipment(data, form.value.participant_id)
+              .subscribe(
+                response => {
+                if (this.route.snapshot.params.participantID == -1)
+                    this.router.navigate([`/equipment`]);
+                  else 
+                    this.router.navigate([`/participant/${this.route.snapshot.params.participantID}`]);
+                },
+                error => {
+                  console.log(error);
+                }
+              );
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    }
+    else {
+      const data = {
+        name: form.value.name,
+        storage_loc: form.value.storage_loc,
+        year: form.value.year,
+        image: null,
+        eq_condition: form.value.eq_condition,
+      };
+      this.server.addEquipment(data, form.value.participant_id)
+        .subscribe(
+          response => {
+          if (this.route.snapshot.params.participantID == -1)
+              this.router.navigate([`/equipment`]);
+            else 
+              this.router.navigate([`/participant/${this.route.snapshot.params.participantID}`]);
+          },
+          error => {
+            console.log(error);
+          }
+        )
+    }
   }
 
 }

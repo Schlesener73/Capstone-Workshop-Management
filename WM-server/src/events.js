@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
+const fs = require('fs')
 
 var fileDir = './uploaded_images';
 
@@ -15,13 +16,14 @@ var storage = multer.diskStorage({
 
   // Setting name of file saved
   filename: function (req, file, cb) {
-      cb(null, file.originalname)
+      cb(null, file.originalname.split('.')[0] + '-' + Date.now() + '.' + file.originalname.split('.')[1]);
   }
 })
 
 var upload = multer({
   storage: storage
 })
+
 
 function createRouter(db) {
   const router = express.Router();
@@ -514,7 +516,9 @@ function createRouter(db) {
   });
 
   // delete equipment from participant
-  router.delete('/equipment/:id', function(req, res, next) {
+  router.delete('/equipment/:id/:filename', function(req, res, next) {
+    console.log("ID: " + req.params.id);
+    console.log("Filename: " + req.params.filename);
     db.query(
       'DELETE FROM equipment WHERE id=?',
       [req.params.id],
@@ -522,6 +526,15 @@ function createRouter(db) {
         if (error) {
           res.status(500).json({status: 'error'});
         } else {
+          if (req.params.filename != "none") {
+            fs.unlinkSync(fileDir + '/' + req.params.filename), (err) => {
+              if (err) {
+                console.error(err)
+                return
+              }
+              //file removed
+            }
+          }
           res.status(200).json({status: 'ok'});
         }
       }

@@ -1,4 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { String2ampmPipe } from '../convert2ampm.pipe';
+import { PhonePipe } from '../phone.pipe';
 
 import { ViewEquipmentComponent } from './view-equipment.component';
 
@@ -8,7 +12,12 @@ describe('ViewEquipmentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewEquipmentComponent ]
+      imports: [ HttpClientTestingModule, RouterTestingModule ],
+      declarations: [
+        ViewEquipmentComponent,
+        String2ampmPipe,
+        PhonePipe
+       ]
     })
     .compileComponents();
   }));

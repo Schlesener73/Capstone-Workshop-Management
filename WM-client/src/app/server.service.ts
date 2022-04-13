@@ -117,7 +117,10 @@ export class ServerService {
   }
 
   deleteEquipment(data): Observable<any> {
-    return this.http.delete(`${environment.serverUrl}/equipment/${data.id}`);
+    if (data.image != '' && data.image != null)
+      return this.http.delete(`${environment.serverUrl}/equipment/${data.id}/${data.image}`);
+    else
+      return this.http.delete(`${environment.serverUrl}/equipment/${data.id}/none`);
   }
 
   updateWorkshopCount(id, data): Observable<any> {

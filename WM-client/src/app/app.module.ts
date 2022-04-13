@@ -24,6 +24,7 @@ import { PhonePipe } from './phone.pipe';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { InterceptorService } from './services/interceptor-service.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { InterceptorService } from './services/interceptor-service.service';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   providers: [
   ],

@@ -74,6 +74,7 @@ export class NavComponent implements OnInit {
     this.subscription17 = this.navbar.loDisplay.subscribe(loShow => this.loShow = loShow); 
   }
 
+  
   ngOnDestroy() {
     this.subscription1.unsubscribe();
     this.subscription2.unsubscribe();
