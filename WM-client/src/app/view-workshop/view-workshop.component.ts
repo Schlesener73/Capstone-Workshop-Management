@@ -135,7 +135,6 @@ export class ViewWorkshopComponent implements OnInit {
     .subscribe(
       result => {
         this.workshop = result[0];
-        document.getElementById("EWh").setAttribute("href", `/workshops/${this.workshop.id}`);
         console.log(result);
       },
       error => {
