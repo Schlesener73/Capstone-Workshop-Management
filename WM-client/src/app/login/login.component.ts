@@ -53,9 +53,8 @@ export class LoginComponent implements OnInit {
   showILmessage: boolean = false;
   loginForm: FormGroup = this.fb.group({
     username: [null, [Validators.required, Validators.pattern('[A-Za-z][A-Za-z0-9]*'), Validators.minLength(3), Validators.maxLength(20)]],
-    password: [null, [Validators.required, Validators.pattern('[A-Za-z][A-Za-z0-9!@#$]*'), Validators.minLength(8), Validators.maxLength(30)]]
+    password: [null, [Validators.required, Validators.pattern('[A-Za-z][A-Za-z0-9!@#$]*'), Validators.minLength(8), Validators.maxLength(128)]]
   });
-
 
   constructor(
     private _api: ServerService, 
@@ -136,8 +135,6 @@ export class LoginComponent implements OnInit {
         this._auth.setDataInLocalStorage('token', res.token);
         this._router.navigate(['workshops']);
       }
-      else
-        this.showILmessage = true;
     })
   }
 

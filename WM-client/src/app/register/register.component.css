@@ -73,3 +73,9 @@
     background: lightgray;
     color: white;
 }
+
+.message {
+	color: red;
+	font-size: 10px;
+	padding: 5px 0px 0px 0px;
+}

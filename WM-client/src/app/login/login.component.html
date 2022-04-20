@@ -9,7 +9,6 @@
                 type="text"
                 formControlName="username"
                 class="input-field"
-                id="username"
             />
             <div class="message"
                 *ngIf="loginForm.get('username').hasError('minlength') && !loginForm.get('username').hasError('pattern')">
@@ -31,7 +30,6 @@
                 type="password"
                 formControlName="password"
                 class="input-field"
-                id="password"
             />
             <div class="message"
                 *ngIf="loginForm.get('password').hasError('minlength') && !loginForm.get('password').hasError('pattern')">
@@ -51,10 +49,4 @@
 
     </form>
 
-</div>
-
-<div class="errorMessage" *ngIf="showILmessage">
-    <div>
-        Invalid username and/or password.  Please try again.
-    </div>
 </div>

@@ -48,11 +48,11 @@ export class AddEquipmentComponent implements OnInit {
   subscription17: Subscription;
 
   participants: any[] = [];
-  fileInputLabel: string;
+  //fileInputLabel: string;
   equipmentForm: FormGroup = this.fb.group({
     name: [null, [Validators.required, Validators.minLength(1)]],
     storage_loc: null,
-    year: [null, Validators.pattern('[12][0-9]{3}')],
+    year: [null, [Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]],
     image: [''],
     eq_condition: null,
     participant_id: this.route.snapshot.params.participantID
@@ -143,13 +143,15 @@ export class AddEquipmentComponent implements OnInit {
 
   onFileSelect(event) {
     const file = event.target.files[0];
-    this.fileInputLabel = file.name;
+    alert("file: " + file);
+    //this.fileInputLabel = file.name;
     this.equipmentForm.get('image').setValue(file);
   }
 
   createEquipment(form) {
     var filename = this.equipmentForm.get('image').value;
     const formData = new FormData();
+    alert("FN: " + filename);
     if (filename != '' && filename != null) {
       formData.append('uploadedImage', filename);
       this.server.uploadFile(formData)

@@ -10,6 +10,18 @@
                 formControlName="username"
                 class="input-field"
             />
+            <div class="message"
+                *ngIf="loginForm.get('username').hasError('minlength') && !loginForm.get('username').hasError('pattern')">
+                The minimum length for this field is {{loginForm.get('username').errors.minlength.requiredLength}} characters.
+            </div>
+            <div class="message"
+                *ngIf="loginForm.get('username').hasError('maxlength') && !loginForm.get('username').hasError('pattern')">
+                The maximum length for this field is {{loginForm.get('username').errors.maxlength.requiredLength}} characters.
+            </div>
+            <div class="message"
+                *ngIf="loginForm.get('username').hasError('pattern')">
+                Invalid character
+            </div>
         </div>
 
         <div class="form-group">
@@ -19,6 +31,18 @@
                 formControlName="password"
                 class="input-field"
             />
+            <div class="message"
+                *ngIf="loginForm.get('password').hasError('minlength') && !loginForm.get('password').hasError('pattern')">
+                The minimum length for this field is {{loginForm.get('password').errors.minlength.requiredLength}} characters.
+            </div>
+            <div class="message"
+                *ngIf="loginForm.get('password').hasError('maxlength') && !loginForm.get('password').hasError('pattern')">
+                The maximum length for this field is {{loginForm.get('password').errors.maxlength.requiredLength}} characters.
+            </div>
+            <div class="message"
+                *ngIf="loginForm.get('password').hasError('pattern')">
+                Invalid character
+            </div>
         </div>
 
         <div><span></span><button type="submit" [disabled]="!loginForm.valid">Submit</button></div>

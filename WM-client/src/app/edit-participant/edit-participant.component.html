@@ -18,6 +18,10 @@
                 formControlName="first_name"
                 class="input-field"
             />
+            <div class="message"
+                *ngIf="participantForm.get('first_name').hasError('pattern')">
+                Invalid character
+            </div>
         </div>
 
         <div class="form-group">
@@ -27,6 +31,10 @@
                 formControlName="last_name"
                 class="input-field"
             />
+            <div class="message"
+                *ngIf="participantForm.get('last_name').hasError('pattern')">
+                Invalid character
+            </div>
         </div>
 
         <div class="form-group">
@@ -35,7 +43,11 @@
                 type="text"
                 formControlName="address"
                 class="input-field"
-            />
+           />
+            <div class="message"
+                *ngIf="participantForm.get('address').hasError('pattern')">
+                Invalid character
+            </div>
         </div>
 
         <div class="form-group">
@@ -45,6 +57,10 @@
                 formControlName="city"
                 class="input-field"
             />
+            <div class="message"
+                *ngIf="participantForm.get('city').hasError('pattern')">
+                Invalid character
+            </div>
         </div>
 
         <div class="form-group">
@@ -54,6 +70,10 @@
                 formControlName="state"
                 class="input-field"
             />
+            <div class="message"
+                *ngIf="participantForm.get('state').hasError('pattern')">
+                Invalid character
+            </div>
         </div>
 
         <div class="form-group">
@@ -63,6 +83,18 @@
                 formControlName="zip"
                 class="input-field"
             />
+            <div class="message"
+                *ngIf="participantForm.get('zip').hasError('minlength') && !participantForm.get('zip').hasError('pattern')">
+                The minimum length for this field is {{participantForm.get('zip').errors.minlength.requiredLength}} digits.
+            </div>
+            <div class="message"
+                *ngIf="participantForm.get('zip').hasError('maxlength') && !participantForm.get('zip').hasError('pattern')">
+                The maximum length for this field is {{participantForm.get('zip').errors.maxlength.requiredLength}} digits.
+            </div>
+            <div class="message"
+                *ngIf="participantForm.get('zip').hasError('pattern')">
+                Invalid character
+            </div>
         </div>
 
         <div class="form-group">
@@ -72,6 +104,10 @@
                 formControlName="email"
                 class="input-field"
             />
+            <div class="message"
+                *ngIf="participantForm.get('email').hasError('email')">
+                Invalid email address
+            </div>
         </div>
 
         <div class="form-group">
@@ -81,6 +117,18 @@
                 formControlName="phone"
                 class="input-field"
             />
+            <div class="message"
+                *ngIf="participantForm.get('phone').hasError('minlength') && !participantForm.get('phone').hasError('pattern')">
+                The minimum length for this field is {{participantForm.get('phone').errors.minlength.requiredLength}} digits.
+            </div>
+            <div class="message"
+                *ngIf="participantForm.get('phone').hasError('maxlength') && !participantForm.get('phone').hasError('pattern')">
+                The maximum length for this field is {{participantForm.get('phone').errors.maxlength.requiredLength}} digits.
+            </div>
+            <div class="message"
+                *ngIf="participantForm.get('phone').hasError('pattern')">
+                Invalid character
+            </div>
         </div>
 
         <div><span></span><button type="submit" [disabled]="!participantForm.valid">Submit</button></div>

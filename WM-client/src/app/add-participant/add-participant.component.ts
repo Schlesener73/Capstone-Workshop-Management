@@ -48,14 +48,14 @@ export class AddParticipantComponent implements OnInit {
 
   workshops: any[] = [];
   participantForm: FormGroup = this.fb.group({
-    first_name: [null, [Validators.required, Validators.pattern('[A-Za-z- ]*')]],
-    last_name: [null, [Validators.required, Validators.pattern('[A-Za-z- ]*')]],
-    address: [null, Validators.pattern('[A-Za-z0-9- ]*')],
+    first_name: [null, [Validators.required, Validators.pattern('[A-Za-z][A-Za-z- ]*')]],
+    last_name: [null, [Validators.required, Validators.pattern('[A-Za-z][A-Za-z- ]*')]],
+    address: [null, Validators.pattern('[A-Za-z#0-9- ]*')],
     city: [null, Validators.pattern('[A-Za-z- ]*')],
     state: [null, Validators.pattern('[A-Za-z ]*')],
-    zip: [null, Validators.pattern('[0-9]{5}')],
+    zip: [null, [Validators.pattern('[0-9]*'), Validators.minLength(5), Validators.maxLength(5)]],
     email: [null, Validators.email],
-    phone: [null, Validators.pattern('[0-9]{10}')],
+    phone: [null, [Validators.pattern('[0-9]*'), Validators.minLength(10), Validators.maxLength(10)]],
     workshop_id: this.route.snapshot.params.workshopID
   });
 
