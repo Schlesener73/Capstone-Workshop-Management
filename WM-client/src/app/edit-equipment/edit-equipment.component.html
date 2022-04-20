@@ -1,40 +1,40 @@
-<div style="width: 500px; margin: auto;">
-    <h4 text-align="center">Edit Equipment</h4>
+<div class="form-style-2">
+    <div class="form-style-2-heading">Edit Equipment</div>
 
     <form [formGroup]="equipmentForm" (ngSubmit)="saveEquipment(equipmentForm)">
 
         <div class="form-group">
-            <label>Checked Out To</label>
-            <select formControlName="participant_id" class="form-control">
-                <option value="-1">---</option>
+            <label><span>Participant</span></label>
+            <select formControlName="participant_id" class="select-field">
+                <option value="-1">Not Checked Out</option>
                 <option *ngFor="let participant of participants" value="{{participant.id}}">{{participant.last_name}}, {{participant.first_name}}</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label>Name</label>
+            <label><span>Name <span class="required">*</span></span></label>
             <input
                 type="text"
                 formControlName="name"
-                class="form-control"
+                class="input-field"
             />
         </div>
 
         <div class="form-group">
-            <label>Storage Location</label>
+            <label><span>Storage Location</span></label>
             <input
                 type="text"
                 formControlName="storage_loc"
-                class="form-control"
+                class="input-field"
             />
         </div>
 
         <div class="form-group">
-            <label>Year</label>
+            <label><span>Year</span></label>
             <input
                 type="text"
                 formControlName="year"
-                class="form-control"
+                class="input-field"
             />
         </div>
 <!--
@@ -48,16 +48,16 @@
             />
         </div>
 -->
-        <div class="form-group">
-            <label>Condition</label>
-            <input
-                type="text"
-                formControlName="eq_condition"
-                class="form-control"
-            />
-        </div>
+<div class="form-group">
+    <label><span>Condition</span></label>
+    <input
+        type="text"
+        formControlName="eq_condition"
+        class="input-field"
+    />
+</div>
 
-        <button type="submit" [disabled]="!equipmentForm.valid">Submit</button>
+<div><span></span><button type="submit" [disabled]="!equipmentForm.valid">Submit</button></div>
 
     </form>
 

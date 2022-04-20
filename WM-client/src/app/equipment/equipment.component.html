@@ -14,7 +14,7 @@
             <th>Condition</th>
             </tr>
         <tr *ngFor="let equip of equipment">
-            <td><a href="javascript:void(0);" (click)="viewEquipment(equip)">{{equip.name}}</a></td>
+            <td id="col-left"><a href="javascript:void(0);" (click)="viewEquipment(equip)">{{equip.name}}</a></td>
             <td>{{equip.storage_loc}}</td>
             <td>{{equip.year}}</td>
             <td>{{equip.eq_condition}}</td>

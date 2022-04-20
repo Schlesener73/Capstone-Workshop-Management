@@ -21,3 +21,7 @@ td, th {
     position: fixed;
     left: 10px;
 }
+
+#col-left {
+    text-align: left;
+}

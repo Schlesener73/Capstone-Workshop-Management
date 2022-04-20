@@ -7,17 +7,15 @@ table, tr, td, th {
     padding: 5px 20px;
 }
 
-td, th {
+th {
     text-align: center;
-}
-
-.button-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
 }
 
 .options {
     position: fixed;
     left: 10px;
+}
+
+#col-ctr {
+    text-align: center;
 }

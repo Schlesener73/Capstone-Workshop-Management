@@ -1,54 +1,54 @@
-<div style="width: 500px; margin: auto;">
-    <h4 text-align="center">Add Workshop</h4>
+<div class="form-style-2">
+    <div class="form-style-2-heading">Add Workshop</div>
 
     <form [formGroup]="workshopForm" (ngSubmit)="saveWorkshop(workshopForm)">
 
         <div class="form-group">
-            <label>Start Date</label>
+            <label><span>Start Date <span class="required">*</span></span></label>
             <input
                 type="date"
+                class="select-field"
                 formControlName="start"
-                class="form-control"
             />
         </div>
 
         <div class="form-group">
-            <label>End Date</label>
+            <label><span>End Date <span class="required">*</span></span></label>
             <input
                 type="date"
+                class="input-field"
                 formControlName="end"
-                class="form-control"
             />
         </div>
 
         <div class="form-group">
-            <label>Meeting Time</label>
+            <label><span>Meeting Time <span class="required">*</span></span></label>
             <input
                 type="time"
+                class="input-field"
                 formControlName="meet"
-                class="form-control"
             />
         </div>
 
         <div class="form-group">
-            <label>Location</label>
+            <label><span>Location <span class="required">*</span></span></label>
             <input
                 type="text"
+                class="input-field"
                 formControlName="location"
-                class="form-control"
             />
         </div>
 
         <div class="form-group">
-            <label>Frequency</label>
+            <label><span>Frequency <span class="required">*</span></span></label>
             <input
                 type="text"
+                class="input-field"
                 formControlName="frequency"
-                class="form-control"
             />
         </div>
 
-        <button type="submit" [disabled]="!workshopForm.valid">Submit</button>
+        <div><span></span><button type="submit" [disabled]="!workshopForm.valid"><span> </span>Submit</button></div>
 
     </form>
 

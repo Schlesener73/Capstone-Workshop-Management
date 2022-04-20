@@ -52,8 +52,8 @@ export class LoginComponent implements OnInit {
   errorMessage: any;
   showILmessage: boolean = false;
   loginForm: FormGroup = this.fb.group({
-    username: [null, [Validators.required, Validators.pattern('[A-Za-z][A-Za-z0-9]*'), Validators.minLength(3)]],
-    password: [null, [Validators.required, Validators.pattern('[A-Za-z][A-Za-z0-9!@#$]*'), Validators.minLength(8)]]
+    username: [null, [Validators.required, Validators.pattern('[A-Za-z][A-Za-z0-9]*'), Validators.minLength(3), Validators.maxLength(20)]],
+    password: [null, [Validators.required, Validators.pattern('[A-Za-z][A-Za-z0-9!@#$]*'), Validators.minLength(8), Validators.maxLength(30)]]
   });
 
 

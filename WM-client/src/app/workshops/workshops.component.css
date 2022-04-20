@@ -22,3 +22,7 @@ td, th {
     left: 10px;
 }
 
+#main-column {
+    text-align: left;
+    color: green;
+}

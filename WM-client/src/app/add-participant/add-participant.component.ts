@@ -162,7 +162,7 @@ export class AddParticipantComponent implements OnInit {
             .subscribe(
               response => {
                 console.log(response);
-                this.router.navigate([`/workshop/${this.route.snapshot.params.workshopID}`]);
+                this.router.navigate([`/workshop/${form.value.workshop_id}`]);
               },
               error => {
                 console.log(error);

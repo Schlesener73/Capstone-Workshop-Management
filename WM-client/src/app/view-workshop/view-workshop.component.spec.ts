@@ -63,9 +63,6 @@ describe('ViewWorkshopComponent', () => {
       ],
       providers: [
         { provide: ServerService, useValue: fakeServerService }
-//        {provide: ServerService, useValue: serverServiceSpy1, serverServiceSpy2, serverServiceSpy3}
-//        {provide: ServerService, useValue: serverServiceSpy2},
-        //{provide: ServerService, useValue: serverServiceSpy3}
       ]
     })
     .compileComponents();

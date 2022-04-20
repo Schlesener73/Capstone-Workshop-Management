@@ -1,63 +1,63 @@
-<div style="width: 500px; margin: auto;">
-    <h4 text-align="center">Add Equipment</h4>
+<div class="form-style-2">
+    <div class="form-style-2-heading">Add Equipment</div>
 
     <form [formGroup]="equipmentForm" (ngSubmit)="createEquipment(equipmentForm)">
 
         <div class="form-group">
-            <label>Participant</label>
-            <select formControlName="participant_id" class="form-control">
+            <label><span>Participant</span></label>
+            <select formControlName="participant_id" class="select-field">
                 <option value="-1">Not Checked Out</option>
                 <option *ngFor="let participant of participants" value="{{participant.id}}">{{participant.last_name}}, {{participant.first_name}}</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label>Name</label>
+            <label><span>Name <span class="required">*</span></span></label>
             <input
                 type="text"
                 formControlName="name"
-                class="form-control"
+                class="input-field"
             />
         </div>
 
         <div class="form-group">
-            <label>Storage Location</label>
+            <label><span>Storage Location</span></label>
             <input
                 type="text"
                 formControlName="storage_loc"
-                class="form-control"
+                class="input-field"
             />
         </div>
 
         <div class="form-group">
-            <label>Year</label>
+            <label><span>Year</span></label>
             <input
                 type="text"
                 formControlName="year"
-                class="form-control"
+                class="input-field"
             />
         </div>
 
         <div class="form-group">
-            <label>Image</label>
+            <label><span>Image</span></label>
             <input
                 type="file"
                 formControlName="image"
-                class="form-control"
+                class="input-field"
                 (change)="onFileSelect($event)"
             />
         </div>
 
         <div class="form-group">
-            <label>Condition</label>
+            <label><span>Condition</span></label>
             <input
                 type="text"
                 formControlName="eq_condition"
-                class="form-control"
+                class="input-field"
             />
         </div>
 
-        <button type="submit" [disabled]="!equipmentForm.valid">Submit</button>
+        <div><span></span><button type="submit" [disabled]="!equipmentForm.valid">Submit</button></div>
 
     </form>
 

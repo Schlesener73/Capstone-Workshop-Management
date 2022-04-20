@@ -2,19 +2,20 @@
     <div class="section1">
         <table>
             <tr>
-                <td><b>Participant Name:&nbsp;&nbsp;</b>{{participant.first_name}} {{participant.last_name}}</td>
+                <td id="col-left"><b>Participant Name:&nbsp;&nbsp;</b>{{participant.first_name}} {{participant.last_name}}</td>
             </tr>
             <tr>
-                <td><b>Address:&nbsp;&nbsp;</b>{{participant.address}}<span *ngIf="participant.address != null && participant.address != ''">, </span>{{participant.city}}<span *ngIf="participant.city != null && participant.city != ''">, </span>{{participant.state}}  {{participant.zip}}</td>
+                <td id="col-left"><b>Address:&nbsp;&nbsp;</b>{{participant.address}}
+                    <span *ngIf="participant.address != null && participant.address != ''">, </span>{{participant.city}}<span *ngIf="participant.city != null && participant.city != ''">, </span>{{participant.state}}  {{participant.zip}}</td>
         </table>
     </div>
     <div class="section2">
         <table>
             <tr>
-                <td><b>Email:&nbsp;&nbsp;</b>{{participant.email}}</td>
+                <td id="col-left"><b>Email:&nbsp;&nbsp;</b>{{participant.email}}</td>
             </tr>
             <tr>
-                <td><b>Phone:&nbsp;&nbsp;</b><span *ngIf="participant.phone != null && participant.phone != ''">{{participant.phone | phone}}</span></td>
+                <td id="col-left"><b>Phone:&nbsp;&nbsp;</b><span *ngIf="participant.phone != null && participant.phone != ''">{{participant.phone | phone}}</span></td>
             </tr>
         </table>
     </div>
@@ -26,7 +27,7 @@
                 <th>Workshop Dates</th>
                 <th>Meet</th>
                 <th>Location</th>
-                <th>Participants</th>
+                <th>Enrolled</th>
             </tr>
             <tr>
                 <td><a href="/workshop/{{workshop.id}}">{{workshop.start | date:'MMMM d, y'}} - {{workshop.end | date:'MMMM d, y'}}</a></td>
@@ -46,7 +47,7 @@
                 <th>Condition</th>
             </tr>
             <tr *ngFor="let equip of equipment">
-                <td><a href="javascript:void(0);" (click)="viewEquipment(equip)">{{equip.name}}</a></td>
+                <td id="col-left"><a href="javascript:void(0);" (click)="viewEquipment(equip)">{{equip.name}}</a></td>
                 <td>{{equip.storage_loc}}</td>
                 <td>{{equip.year}}</td>
                 <td>{{equip.eq_condition}}</td>

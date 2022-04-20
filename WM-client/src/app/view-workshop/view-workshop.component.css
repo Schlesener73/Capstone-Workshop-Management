@@ -40,14 +40,8 @@ table, tr, td, th {
     padding: 5px 15px;
 }
 
-td, th {
+th, td {
     text-align: center;
-}
-
-.button-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
 }
 
 .dateRange {
@@ -60,4 +54,8 @@ td, th {
     position: fixed;
     right: 5%;
     
+}
+
+#col-left {
+    text-align: left;
 }

@@ -51,13 +51,11 @@ table, tr, td, th {
 }
 
 td, th {
-    text-align: left;
+    text-align: center;
 }
 
-.button-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
+#col-left {
+    text-align: left;
 }
 
 .oneItem {

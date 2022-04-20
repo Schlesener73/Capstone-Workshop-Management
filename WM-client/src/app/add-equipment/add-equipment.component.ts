@@ -129,7 +129,7 @@ export class AddEquipmentComponent implements OnInit {
   }
 
   getParticipants() {
-    this.server.getParticipants("All")
+    this.server.getParticipants("all")
       .subscribe(
         result => {
           this.participants = result;
