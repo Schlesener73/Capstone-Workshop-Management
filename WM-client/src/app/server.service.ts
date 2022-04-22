@@ -58,8 +58,8 @@ export class ServerService {
     return this.http.put(`${environment.serverUrl}/participants/${id}`, data);
   }
 
-  updateEquipment(id, data): Observable<any> {
-    return this.http.put(`${environment.serverUrl}/equipment/${id}`, data);
+  updateEquipment(id, data, change): Observable<any> {
+    return this.http.put(`${environment.serverUrl}/equipment/${id}/${change}`, data);
   }
 
   viewWorkshop(id): Observable<any> {

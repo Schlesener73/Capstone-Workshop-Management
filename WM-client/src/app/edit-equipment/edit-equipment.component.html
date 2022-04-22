@@ -37,27 +37,27 @@
                 class="input-field"
             />
         </div>
-<!--
+
         <div class="form-group">
-            <label>Image</label>
+            <label><span>Change Image</span></label>
             <input
                 type="file"
                 formControlName="image"
-                class="form-control"
+                class="input-field"
                 (change)="onFileSelect($event)"
             />
         </div>
--->
-<div class="form-group">
-    <label><span>Condition</span></label>
-    <input
-        type="text"
-        formControlName="eq_condition"
-        class="input-field"
-    />
-</div>
 
-<div><span></span><button type="submit" [disabled]="!equipmentForm.valid">Submit</button></div>
+        <div class="form-group">
+            <label><span>Condition</span></label>
+            <input
+                type="text"
+                formControlName="eq_condition"
+                class="input-field"
+            />
+        </div>
+
+        <div><span></span><button type="submit" [disabled]="!equipmentForm.valid">Submit</button></div>
 
     </form>
 

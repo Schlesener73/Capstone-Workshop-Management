@@ -542,34 +542,64 @@ function createRouter(db) {
   });
 
   // update equipment
-  router.put('/equipment/:id', function(req, res, next) {
-    // image=?, req.body.image, 
+  router.put('/equipment/:id/:change', function(req, res, next) {
+    console.log("Change: " + req.params.change);
     if (req.body.participant_id != -1) {
-      db.query(
-        'UPDATE equipment SET name=?, storage_loc=?, year=?, eq_condition=?, participant_id=? WHERE id=?',
-        [req.body.name, req.body.storage_loc, req.body.year, req.body.eq_condition, req.body.participant_id, req.params.id],
-          (error) => {
-            if (error) {
-              console.error(error);
-              res.status(500).json({status: 'error'});
-            } else {
-              res.status(200).json({status: 'ok'});
+      if (req.params.change == "true") {
+        db.query(
+          'UPDATE equipment SET image=?, name=?, storage_loc=?, year=?, eq_condition=?, participant_id=? WHERE id=?',
+          [req.body.image, req.body.name, req.body.storage_loc, req.body.year, req.body.eq_condition, req.body.participant_id, req.params.id],
+            (error) => {
+              if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+              } else {
+                res.status(200).json({status: 'ok'});
+              }
             }
-          }
-      );
+        );
+      }
+      else
+        db.query(
+          'UPDATE equipment SET name=?, storage_loc=?, year=?, eq_condition=?, participant_id=? WHERE id=?',
+          [req.body.name, req.body.storage_loc, req.body.year, req.body.eq_condition, req.body.participant_id, req.params.id],
+            (error) => {
+              if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+              } else {
+                res.status(200).json({status: 'ok'});
+              }
+            }
+        );
     } else {
-      db.query(
-        'UPDATE equipment SET name=?, storage_loc=?, year=?, eq_condition=?, participant_id=NULL WHERE id=?',
-        [req.body.name, req.body.storage_loc, req.body.year, req.body.eq_condition, req.params.id],
-          (error) => {
-            if (error) {
-              console.error(error);
-              res.status(500).json({status: 'error'});
-            } else {
-              res.status(200).json({status: 'ok'});
+      if (req.params.change == "true") {
+        db.query(
+          'UPDATE equipment SET image=?, name=?, storage_loc=?, year=?, eq_condition=?, participant_id=NULL WHERE id=?',
+          [req.body.image, req.body.name, req.body.storage_loc, req.body.year, req.body.eq_condition, req.params.id],
+            (error) => {
+              if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+              } else {
+                res.status(200).json({status: 'ok'});
+              }
             }
-          }
-      );
+        );
+      }
+      else
+        db.query(
+          'UPDATE equipment SET name=?, storage_loc=?, year=?, eq_condition=?, participant_id=NULL WHERE id=?',
+          [req.body.name, req.body.storage_loc, req.body.year, req.body.eq_condition, req.params.id],
+            (error) => {
+              if (error) {
+                console.error(error);
+                res.status(500).json({status: 'error'});
+              } else {
+                res.status(200).json({status: 'ok'});
+              }
+            }
+        );
     }
   });
 

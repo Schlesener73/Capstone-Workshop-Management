@@ -143,7 +143,6 @@ export class AddEquipmentComponent implements OnInit {
 
   onFileSelect(event) {
     const file = event.target.files[0];
-    alert("file: " + file);
     //this.fileInputLabel = file.name;
     this.equipmentForm.get('image').setValue(file);
   }
@@ -151,7 +150,6 @@ export class AddEquipmentComponent implements OnInit {
   createEquipment(form) {
     var filename = this.equipmentForm.get('image').value;
     const formData = new FormData();
-    alert("FN: " + filename);
     if (filename != '' && filename != null) {
       formData.append('uploadedImage', filename);
       this.server.uploadFile(formData)

@@ -50,12 +50,13 @@ export class EditEquipmentComponent implements OnInit {
 
   participants: any[] = [];
   equipment = null;
+  changeFile = false;
   fileInputLabel: string;
   equipmentForm: FormGroup = this.fb.group({
     name: [null, [Validators.required, Validators.minLength(1)]],
     storage_loc: null,
-    year: [null, [Validators.pattern('[0-9]*'), Validators.minLength(4), Validators.maxLength(4)]],
-//    image: [''],
+    year: [null, Validators.pattern('[12][0-9]{3}')],
+    image: [''],
     eq_condition: null,
     participant_id: this.route.snapshot.params.participantID
   });
@@ -163,16 +164,16 @@ export class EditEquipmentComponent implements OnInit {
         }
       );
   }
-/*
+
   onFileSelect(event) {
+    this.changeFile = true;
     const file = event.target.files[0];
     this.fileInputLabel = file.name;
     this.equipmentForm.get('image').setValue(file);
   }
-*/
+
   saveEquipment(form) {
-//    const formData = new FormData();
-//    formData.append('uploadedImage', this.equipmentForm.get('image').value);
+    const formData = new FormData();
     this.equipment = {
       name: form.value.name,
       storage_loc: form.value.storage_loc,
@@ -181,16 +182,32 @@ export class EditEquipmentComponent implements OnInit {
       eq_condition: form.value.eq_condition,
       participant_id: form.value.participant_id
     };
-    /*this.server.uploadFile(formData)
-      .subscribe(
-        response => {
-          console.log(response);
-        },
-        error => {
-          console.log(error);
-        }
-      );*/
-    this.server.updateEquipment(this.route.snapshot.params.id, this.equipment)
+    if (this.changeFile == true) {
+      formData.append('uploadedImage', this.equipmentForm.get('image').value);
+      this.equipment.image = form.value.image.substring(12);
+      this.server.uploadFile(formData)
+        .subscribe(
+          response => {
+            console.log(response);
+            this.equipment.image = response.uploadedFile.filename;
+            this.server.updateEquipment(this.route.snapshot.params.id, this.equipment, this.changeFile)
+            .subscribe(
+              response => {
+                console.log(response);
+                this.router.navigate([`/equipment/${this.route.snapshot.params.id}`]);
+              },
+              error => {
+                console.log(error);
+              }
+            );
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    }
+    else {
+      this.server.updateEquipment(this.route.snapshot.params.id, this.equipment, this.changeFile)
       .subscribe(
         response => {
           console.log(response);
@@ -200,6 +217,8 @@ export class EditEquipmentComponent implements OnInit {
           console.log(error);
         }
       );
+
+    }
   }
 
 }
