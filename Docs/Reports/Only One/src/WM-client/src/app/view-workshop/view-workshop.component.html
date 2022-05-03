@@ -1,0 +1,58 @@
+<div class="grid-container">
+    <div class="section1">
+        <table class="center">
+            <tr>
+                <th>Workshop Dates</th>
+                <th>Meet</th>
+                <th>Location</th>
+                <th>Enrolled</th>
+            </tr>
+            <tr>
+                <td>{{workshop.start | date:'MMMM d, y'}} - {{workshop.end | date:'MMMM d, y'}}</td>
+                <td>{{workshop.frequency}} {{workshop.meet | string2ampm}}</td>
+                <td>{{workshop.location}}</td>
+                <td>{{workshop.numofpart}}</td>
+            </tr>
+        </table>
+        <br><br>
+    </div>
+    <div class="section2" *ngIf="participants != ''">
+        <table class="section2 center">
+            <tr>
+                <th>Participant Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+            <tr *ngFor="let participant of participants">
+                <td id="col-left"><a href="javascript:void(0);" (click)="viewParticipant(participant)">{{participant.last_name}}, {{participant.first_name}}</a></td>
+                <td id="col-left">{{participant.address}}<span *ngIf="participant.address != null && participant.address != ''">, </span>{{participant.city}}<span *ngIf="participant.city != null && participant.city != ''">, </span>{{participant.state}}  {{participant.zip}}</td>
+                <td id="col-left">{{participant.email}}</td>
+                <td><span *ngIf="participant.phone != null && participant.phone != ''">{{participant.phone | phone}}</span></td>
+            </tr>
+        </table>
+        <br><br>
+    </div>
+    <div class="section3" *ngIf="equipment != ''">
+        <table class="center">
+            <tr>
+                <th>Equipment Name</th>
+                <th>Storage Location</th>
+                <th>Year</th>
+                <th>Condition</th>
+            </tr>
+            <tr *ngFor="let equip of equipment">
+                <td id="col-left"><a href="javascript:void(0);" (click)="viewEquipment(equip)">{{equip.name}}</a></td>            <td>{{equip.storage_loc}}</td>
+                <td>{{equip.year}}</td>
+                <td>{{equip.eq_condition}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="right-menu">
+        <div>
+            <a class="btn delIcon" (click)="deleteWorkshop()"><i class="fa fa-trash fa-2x"></i></a>
+        </div>
+    </div>
+
+</div>

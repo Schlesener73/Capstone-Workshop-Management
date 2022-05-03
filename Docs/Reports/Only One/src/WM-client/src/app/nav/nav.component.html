@@ -1,0 +1,20 @@
+<div class="header-section">
+    <div class="title">Workshop Management System
+    </div>
+    <div class="menu-bar">
+        <ul id="nav-bar">
+            <li><a routerLink="/workshops" *ngIf="wsShow">WORKSHOPS</a></li>
+            <li><a routerLink="/new-workshop" *ngIf="nwsShow"><i class="fa fa-plus"></i> WORKSHOP</a></li>
+            <li><a routerLink="{{ewsRoute}}" *ngIf="ewsShow"><i class="fa fa-edit"></i> WORKSHOP</a></li>
+            <li><a routerLink="/participants" *ngIf="ptShow">PARTICIPANTS</a></li>
+            <li><a routerLink="{{aptRoute}}" *ngIf="aptShow"><i class="fa fa-plus"></i> PARTICIPANT</a></li>
+            <li><a routerLink="{{eptRoute}}" *ngIf="eptShow"><i class="fa fa-edit"></i> PARTICIPANT</a></li>
+            <li><a routerLink="/equipment" *ngIf="eqShow">EQUIPMENT</a></li>
+            <li><a routerLink="{{aeqRoute}}" *ngIf="aeqShow"><i class="fa fa-plus"></i> EQUIPMENT</a></li>
+            <li><a routerLink="{{eeqRoute}}" *ngIf="eeqShow"><i class="fa fa-edit"></i> EQUIPMENT</a></li>
+            <li><a routerLink="/login" *ngIf="liShow">LOGIN</a></li>
+            <li><a routerLink="/register" *ngIf="regShow">REGISTER</a></li>
+            <li><a class="btn" (click)="logout()" *ngIf="loShow">LOGOUT</a></li>
+        </ul>
+    </div>
+</div>

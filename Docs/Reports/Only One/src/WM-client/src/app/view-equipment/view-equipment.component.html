@@ -1,0 +1,79 @@
+<div class="grid-container">
+    <div class="image-section">
+        <table>
+            <tr>
+                <td><img src="{{imagePath}}/{{equipment.image}}" width="100%" alt=""></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section1">
+        <table>
+            <tr>
+                <td><b>Equipment Name:</b>&nbsp;&nbsp;{{equipment.name}}</td>
+            </tr>
+            <tr>
+                <td><b>Year:</b>&nbsp;&nbsp;{{equipment.year}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="section2">
+        <table>
+            <tr>
+                <td><b>Storage Location:</b>&nbsp;&nbsp;{{equipment.storage_loc}}</td>
+            </tr>
+            <tr>
+                <td><b>Condition:</b>&nbsp;&nbsp;{{equipment.eq_condition}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section3" *ngIf="equipment.participant_id != null">
+        <table>
+            <tr>
+                <td><b>Participant Name:</b>&nbsp;&nbsp;<a href="/participant/{{this.participant.id}}">{{participant.last_name}}, {{participant.first_name}}</a></td>
+            </tr>
+            <tr>
+                <td><b>Address:&nbsp;&nbsp;</b>{{participant.address}}<span *ngIf="participant.address != null && participant.address != ''">, </span>{{participant.city}}<span *ngIf="participant.city != null && participant.city != ''">, </span>{{participant.state}}  {{participant.zip}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="section4" *ngIf="equipment.participant_id != null">
+        <table>
+            <tr>
+                <td><b>Email:</b>&nbsp;&nbsp;{{participant.email}}</td>
+            </tr>
+            <tr>
+                <td><b>Phone:&nbsp;&nbsp;</b><span *ngIf="participant.phone != null && participant.phone != ''">{{participant.phone | phone}}</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section5" *ngIf="participant.workshop_id != null">
+        <table>
+            <tr>
+                <td><b>Workshop Dates:</b>&nbsp;&nbsp;<a href="/workshop/{{workshop.id}}">{{workshop.start | date:'MMMM d, y'}} - {{workshop.end | date:'MMMM d, y'}}</a></td>
+            </tr>
+            <tr>
+                <td><b>Meet:</b>&nbsp;&nbsp;{{workshop.frequency}} {{workshop.meet | string2ampm}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="section6" *ngIf="participant.workshop_id != null">
+        <table>
+            <tr>
+                <td><b>Location:</b>&nbsp;&nbsp;{{workshop.location}}</td>
+            </tr>
+            <tr>
+                <td><b>Participants:</b>&nbsp;&nbsp;{{workshop.numofpart}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="right-menu">
+        <div>
+            <a class="btn delIcon" (click)="deleteEquipment()"><i class="fa fa-trash fa-2x"></i></a>
+        </div>
+    </div>  
+        
+</div>

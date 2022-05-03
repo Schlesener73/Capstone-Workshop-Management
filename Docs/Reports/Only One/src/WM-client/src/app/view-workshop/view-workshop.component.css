@@ -1,0 +1,61 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 90% 10%;
+    grid-gap: 10px;
+    background-color: white;
+    padding: 10px;
+}
+
+.right-menu {
+    grid-row-start: 1;
+    grid-row-end: 4;
+    grid-column-start: 2;
+}
+
+.section1 {
+    color: black;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}  
+
+.section2 {
+    color: black;
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}  
+  
+.section3 {
+    grid-row-start: 3;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}  
+
+table.center {
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+table, tr, td, th {
+    padding: 5px 15px;
+}
+
+th, td {
+    text-align: center;
+}
+
+.dateRange {
+    position: fixed;
+    left: 10px;
+}
+
+.delIcon {
+    background-color: white;
+    position: fixed;
+    right: 5%;
+    
+}
+
+#col-left {
+    text-align: left;
+}
